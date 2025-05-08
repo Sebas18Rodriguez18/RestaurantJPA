@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <persistence-unit name="co.edu.sena_RestaurantJPA_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>co.edu.sena.restaurantjpa.model.DishCategory</class>
+    <class>co.edu.sena.restaurantjpa.model.Kitchen</class>
+    <class>co.edu.sena.restaurantjpa.model.Table</class>
+    <class>co.edu.sena.restaurantjpa.model.OrderDetails</class>
+    <class>co.edu.sena.restaurantjpa.model.Shift</class>
+    <class>co.edu.sena.restaurantjpa.model.Dish</class>
+    <class>co.edu.sena.restaurantjpa.model.Pay</class>
+    <class>co.edu.sena.restaurantjpa.model.Roles</class>
+    <class>co.edu.sena.restaurantjpa.model.Box</class>
+    <class>co.edu.sena.restaurantjpa.model.Users</class>
+    <class>co.edu.sena.restaurantjpa.model.Order</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdcook?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="developer"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="developer"/>
+    </properties>
+  </persistence-unit>
+</persistence>
