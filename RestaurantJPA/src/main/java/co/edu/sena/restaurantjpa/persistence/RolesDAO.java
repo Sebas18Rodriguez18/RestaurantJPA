@@ -6,34 +6,58 @@ package co.edu.sena.restaurantjpa.persistence;
 
 import co.edu.sena.restaurantjpa.model.Roles;
 import java.util.List;
+import javax.persistence.Query;
 
 /**
  * fecha: 07/05/2025
  * @author Sebastian Rodriguez
  * descripcion: Implementar DAO para modelo de Roles
  */
-public class RolesDAO implements IRolesDAO{
+public class RolesDAO implements IRolesDAO {
 
     @Override
     public void insert(Roles roles) throws Exception {
+        try {
+            EntityManagerHelper.getEntityManager().persist(roles);
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
 
     @Override
     public void update(Roles roles) throws Exception {
+        try {
+            EntityManagerHelper.getEntityManager().merge(roles);
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
 
     @Override
     public void delete(Roles roles) throws Exception {
+        try {
+            EntityManagerHelper.getEntityManager().remove(roles);
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
 
     @Override
     public Roles findById(Long id) throws Exception {
-        return null;
+        try {
+            return EntityManagerHelper.getEntityManager().find(Roles.class, id);
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
 
     @Override
     public List<Roles> findAll() throws Exception {
-        return null;
+        try {
+            Query query = EntityManagerHelper.getEntityManager().createNamedQuery("Roles.findAll");
+            return query.getResultList();
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
-    
 }

@@ -4,36 +4,60 @@
  */
 package co.edu.sena.restaurantjpa.persistence;
 
-import java.util.List;
 import co.edu.sena.restaurantjpa.model.Table;
+import java.util.List;
+import javax.persistence.Query;
 
 /**
  * fecha: 07/05/2025
  * @author Sebastian Rodriguez
  * descripcion: Implementar DAO para modelo de Table
  */
-public class TableDAO implements ITableDAO{
+public class TableDAO implements ITableDAO {
 
     @Override
     public void insert(Table table) throws Exception {
+        try {
+            EntityManagerHelper.getEntityManager().persist(table);
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
 
     @Override
     public void update(Table table) throws Exception {
+        try {
+            EntityManagerHelper.getEntityManager().merge(table);
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
 
     @Override
     public void delete(Table table) throws Exception {
+        try {
+            EntityManagerHelper.getEntityManager().remove(table);
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
 
     @Override
     public Table findById(Long id) throws Exception {
-        return null;
+        try {
+            return EntityManagerHelper.getEntityManager().find(Table.class, id);
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
 
     @Override
     public List<Table> findAll() throws Exception {
-        return null;
+        try {
+            Query query = EntityManagerHelper.getEntityManager().createNamedQuery("Table.findAll");
+            return query.getResultList();
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
-    
 }
