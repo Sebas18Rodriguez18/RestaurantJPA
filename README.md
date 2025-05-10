@@ -82,7 +82,7 @@ El proyecto incluye **11 tablas relacionadas**, que permiten gestionar todo el f
 
 1. 📥 **Clona el repositorio**
    ```bash
-   git clone [https://github.com/Sebas18Rodriguez18/RestaurantJPA.git](https://github.com/Sebas18Rodriguez18/RestaurantJPA/tree/dev) 
+   git clone https://github.com/Sebas18Rodriguez18/RestaurantJPA/tree/dev 
 
 2. 🔧 Configura la base de datos
     - Crea la base de datos bdcook.
