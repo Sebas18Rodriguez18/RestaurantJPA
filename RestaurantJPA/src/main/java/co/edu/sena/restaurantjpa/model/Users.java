@@ -30,7 +30,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
     @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
-    @NamedQuery(name = "Users.findByFullname", query = "SELECT u FROM Users u WHERE u.fullname = :fullname"),
+    @NamedQuery(name = "Users.findByFullName", query = "SELECT u FROM Users u WHERE u.fullName = :fullName"),
     @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
     @NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status")})
@@ -43,8 +43,8 @@ public class Users implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "fullname")
-    private String fullname;
+    @Column(name = "full_name")
+    private String fullName;
     @Basic(optional = false)
     @Column(name = "email")
     private String email;
@@ -56,16 +56,16 @@ public class Users implements Serializable {
     private String status;
     @ManyToMany(mappedBy = "usersCollection")
     private Collection<co.edu.sena.restaurantjpa.model.Table> tableCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Shift> shiftCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cajeroId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cashierId")
     private Collection<Box> boxCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "encargadoId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "managerId")
     private Collection<Kitchen> kitchenCollection;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Roles roleId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "meseroId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "waiterId")
     private Collection<Order> order1Collection;
 
     public Users() {
@@ -75,9 +75,9 @@ public class Users implements Serializable {
         this.id = id;
     }
 
-    public Users(Long id, String fullname, String email, String password, String status) {
+    public Users(Long id, String fullName, String email, String password, String status) {
         this.id = id;
-        this.fullname = fullname;
+        this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.status = status;
@@ -91,12 +91,12 @@ public class Users implements Serializable {
         this.id = id;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {

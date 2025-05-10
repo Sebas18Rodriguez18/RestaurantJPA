@@ -30,10 +30,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Box.findAll", query = "SELECT b FROM Box b"),
     @NamedQuery(name = "Box.findById", query = "SELECT b FROM Box b WHERE b.id = :id"),
-    @NamedQuery(name = "Box.findByNombre", query = "SELECT b FROM Box b WHERE b.nombre = :nombre"),
-    @NamedQuery(name = "Box.findByEstado", query = "SELECT b FROM Box b WHERE b.estado = :estado"),
-    @NamedQuery(name = "Box.findBySaldoInicial", query = "SELECT b FROM Box b WHERE b.saldoInicial = :saldoInicial"),
-    @NamedQuery(name = "Box.findBySaldoActual", query = "SELECT b FROM Box b WHERE b.saldoActual = :saldoActual")})
+    @NamedQuery(name = "Box.findByName", query = "SELECT b FROM Box b WHERE b.name = :name"),
+    @NamedQuery(name = "Box.findByStatus", query = "SELECT b FROM Box b WHERE b.status = :status"),
+    @NamedQuery(name = "Box.findByInitialBalance", query = "SELECT b FROM Box b WHERE b.initialBalance = :initialBalance"),
+    @NamedQuery(name = "Box.findByCurrentBalance", query = "SELECT b FROM Box b WHERE b.currentBalance = :currentBalance")})
 public class Box implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,24 +43,24 @@ public class Box implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "name")
+    private String name;
     @Basic(optional = false)
-    @Column(name = "estado")
-    private String estado;
+    @Column(name = "status")
+    private String status;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @Column(name = "saldo_inicial")
-    private BigDecimal saldoInicial;
+    @Column(name = "initial_balance")
+    private BigDecimal initialBalance;
     @Basic(optional = false)
-    @Column(name = "saldo_actual")
-    private BigDecimal saldoActual;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cajaId")
+    @Column(name = "current_balance")
+    private BigDecimal currentBalance;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "boxId")
     private Collection<Pay> payCollection;
-    @JoinColumn(name = "cajero_id", referencedColumnName = "id")
+    @JoinColumn(name = "cashier_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Users cajeroId;
-    @OneToMany(mappedBy = "cajaId")
+    private Users cashierId;
+    @OneToMany(mappedBy = "boxId")
     private Collection<Order> order1Collection;
 
     public Box() {
@@ -70,12 +70,12 @@ public class Box implements Serializable {
         this.id = id;
     }
 
-    public Box(Long id, String nombre, String estado, BigDecimal saldoInicial, BigDecimal saldoActual) {
+    public Box(Long id, String name, String status, BigDecimal initialBalance, BigDecimal currentBalance) {
         this.id = id;
-        this.nombre = nombre;
-        this.estado = estado;
-        this.saldoInicial = saldoInicial;
-        this.saldoActual = saldoActual;
+        this.name = name;
+        this.status = status;
+        this.initialBalance = initialBalance;
+        this.currentBalance = currentBalance;
     }
 
     public Long getId() {
@@ -86,36 +86,36 @@ public class Box implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getStatus() {
+        return status;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public BigDecimal getSaldoInicial() {
-        return saldoInicial;
+    public BigDecimal getInitialBalance() {
+        return initialBalance;
     }
 
-    public void setSaldoInicial(BigDecimal saldoInicial) {
-        this.saldoInicial = saldoInicial;
+    public void setInitialBalance(BigDecimal initialBalance) {
+        this.initialBalance = initialBalance;
     }
 
-    public BigDecimal getSaldoActual() {
-        return saldoActual;
+    public BigDecimal getCurrentBalance() {
+        return currentBalance;
     }
 
-    public void setSaldoActual(BigDecimal saldoActual) {
-        this.saldoActual = saldoActual;
+    public void setCurrentBalance(BigDecimal currentBalance) {
+        this.currentBalance = currentBalance;
     }
 
     public Collection<Pay> getPayCollection() {
@@ -126,12 +126,12 @@ public class Box implements Serializable {
         this.payCollection = payCollection;
     }
 
-    public Users getCajeroId() {
-        return cajeroId;
+    public Users getCashierId() {
+        return cashierId;
     }
 
-    public void setCajeroId(Users cajeroId) {
-        this.cajeroId = cajeroId;
+    public void setCashierId(Users cashierId) {
+        this.cashierId = cashierId;
     }
 
     public Collection<Order> getOrder1Collection() {

@@ -29,9 +29,9 @@ import javax.persistence.OneToMany;
 @NamedQueries({
     @NamedQuery(name = "Table.findAll", query = "SELECT t FROM Table t"),
     @NamedQuery(name = "Table.findById", query = "SELECT t FROM Table t WHERE t.id = :id"),
-    @NamedQuery(name = "Table.findByNumero", query = "SELECT t FROM Table t WHERE t.numero = :numero"),
-    @NamedQuery(name = "Table.findByCapacidad", query = "SELECT t FROM Table t WHERE t.capacidad = :capacidad"),
-    @NamedQuery(name = "Table.findByEstado", query = "SELECT t FROM Table t WHERE t.estado = :estado")})
+    @NamedQuery(name = "Table.findByNumber", query = "SELECT t FROM Table t WHERE t.number = :number"),
+    @NamedQuery(name = "Table.findByCapacity", query = "SELECT t FROM Table t WHERE t.capacity = :capacity"),
+    @NamedQuery(name = "Table.findByStatus", query = "SELECT t FROM Table t WHERE t.status = :status")})
 public class Table implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,20 +41,20 @@ public class Table implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "numero")
-    private int numero;
+    @Column(name = "number")
+    private int number;
     @Basic(optional = false)
-    @Column(name = "capacidad")
-    private int capacidad;
+    @Column(name = "capacity")
+    private int capacity;
     @Basic(optional = false)
-    @Column(name = "estado")
-    private String estado;
+    @Column(name = "status")
+    private String status;
     @JoinTable(name = "waiter_table", joinColumns = {
-        @JoinColumn(name = "mesa_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "mesero_id", referencedColumnName = "id")})
+        @JoinColumn(name = "table_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "waiter_id", referencedColumnName = "id")})
     @ManyToMany
     private Collection<Users> usersCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mesaId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tableId")
     private Collection<Order> order1Collection;
 
     public Table() {
@@ -64,11 +64,11 @@ public class Table implements Serializable {
         this.id = id;
     }
 
-    public Table(Long id, int numero, int capacidad, String estado) {
+    public Table(Long id, int number, int capacity, String status) {
         this.id = id;
-        this.numero = numero;
-        this.capacidad = capacidad;
-        this.estado = estado;
+        this.number = number;
+        this.capacity = capacity;
+        this.status = status;
     }
 
     public Long getId() {
@@ -79,28 +79,28 @@ public class Table implements Serializable {
         this.id = id;
     }
 
-    public int getNumero() {
-        return numero;
+    public int getNumber() {
+        return number;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public int getCapacidad() {
-        return capacidad;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getStatus() {
+        return status;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Collection<Users> getUsersCollection() {

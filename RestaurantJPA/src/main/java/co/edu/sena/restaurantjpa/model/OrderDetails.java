@@ -27,10 +27,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "OrderDetails.findAll", query = "SELECT o FROM OrderDetails o"),
     @NamedQuery(name = "OrderDetails.findById", query = "SELECT o FROM OrderDetails o WHERE o.id = :id"),
-    @NamedQuery(name = "OrderDetails.findByCantidad", query = "SELECT o FROM OrderDetails o WHERE o.cantidad = :cantidad"),
-    @NamedQuery(name = "OrderDetails.findByPrecioUnitario", query = "SELECT o FROM OrderDetails o WHERE o.precioUnitario = :precioUnitario"),
+    @NamedQuery(name = "OrderDetails.findByQuantity", query = "SELECT o FROM OrderDetails o WHERE o.quantity = :quantity"),
+    @NamedQuery(name = "OrderDetails.findByUnitPrice", query = "SELECT o FROM OrderDetails o WHERE o.unitPrice = :unitPrice"),
     @NamedQuery(name = "OrderDetails.findBySubtotal", query = "SELECT o FROM OrderDetails o WHERE o.subtotal = :subtotal"),
-    @NamedQuery(name = "OrderDetails.findByObservaciones", query = "SELECT o FROM OrderDetails o WHERE o.observaciones = :observaciones")})
+    @NamedQuery(name = "OrderDetails.findByObservations", query = "SELECT o FROM OrderDetails o WHERE o.observations = :observations")})
 public class OrderDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,23 +40,23 @@ public class OrderDetails implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "cantidad")
-    private int cantidad;
+    @Column(name = "quantity")
+    private int quantity;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @Column(name = "precio_unitario")
-    private BigDecimal precioUnitario;
+    @Column(name = "unit_price")
+    private BigDecimal unitPrice;
     @Basic(optional = false)
     @Column(name = "subtotal")
     private BigDecimal subtotal;
-    @Column(name = "observaciones")
-    private String observaciones;
-    @JoinColumn(name = "plato_id", referencedColumnName = "id")
+    @Column(name = "observations")
+    private String observations;
+    @JoinColumn(name = "dish_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Dish platoId;
-    @JoinColumn(name = "orden_id", referencedColumnName = "id")
+    private Dish dishId;
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Order ordenId;
+    private Order orderId;
 
     public OrderDetails() {
     }
@@ -65,10 +65,10 @@ public class OrderDetails implements Serializable {
         this.id = id;
     }
 
-    public OrderDetails(Long id, int cantidad, BigDecimal precioUnitario, BigDecimal subtotal) {
+    public OrderDetails(Long id, int quantity, BigDecimal unitPrice, BigDecimal subtotal) {
         this.id = id;
-        this.cantidad = cantidad;
-        this.precioUnitario = precioUnitario;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
         this.subtotal = subtotal;
     }
 
@@ -80,20 +80,20 @@ public class OrderDetails implements Serializable {
         this.id = id;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public BigDecimal getPrecioUnitario() {
-        return precioUnitario;
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setPrecioUnitario(BigDecimal precioUnitario) {
-        this.precioUnitario = precioUnitario;
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public BigDecimal getSubtotal() {
@@ -104,28 +104,28 @@ public class OrderDetails implements Serializable {
         this.subtotal = subtotal;
     }
 
-    public String getObservaciones() {
-        return observaciones;
+    public String getObservations() {
+        return observations;
     }
 
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
+    public void setObservations(String observations) {
+        this.observations = observations;
     }
 
-    public Dish getPlatoId() {
-        return platoId;
+    public Dish getDishId() {
+        return dishId;
     }
 
-    public void setPlatoId(Dish platoId) {
-        this.platoId = platoId;
+    public void setDishId(Dish dishId) {
+        this.dishId = dishId;
     }
 
-    public Order getOrdenId() {
-        return ordenId;
+    public Order getOrderId() {
+        return orderId;
     }
 
-    public void setOrdenId(Order ordenId) {
-        this.ordenId = ordenId;
+    public void setOrderId(Order orderId) {
+        this.orderId = orderId;
     }
 
     @Override

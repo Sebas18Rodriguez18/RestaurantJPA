@@ -5,10 +5,11 @@
 package co.edu.sena.restaurantjpa.controllers;
 
 import co.edu.sena.restaurantjpa.model.Kitchen;
+import co.edu.sena.restaurantjpa.persistence.DAOFactory;
 import java.util.List;
 
 /**
- * Fecha: 08/05/2025
+ * Fecha: 10/05/2025
  * @author Juan Sebastian Rodriguez Cruz
  * Objetivo: Implementar la interface para controlar el modelo Kitchen.
  */
@@ -33,7 +34,7 @@ public class KitchenController implements IKitchenController{
 
     @Override
     public List<Kitchen> findAll() throws Exception {
-        return null;
+        return DAOFactory.getKitchenDAO().findAll();
     }
     
 }

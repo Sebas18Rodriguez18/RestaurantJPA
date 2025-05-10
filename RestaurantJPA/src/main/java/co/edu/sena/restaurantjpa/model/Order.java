@@ -33,8 +33,13 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o"),
     @NamedQuery(name = "Order1.findById", query = "SELECT o FROM Order1 o WHERE o.id = :id"),
+<<<<<<< Updated upstream
     @NamedQuery(name = "Order1.findByFecha", query = "SELECT o FROM Order1 o WHERE o.fecha = :fecha"),
     @NamedQuery(name = "Order1.findByEstado", query = "SELECT o FROM Order1 o WHERE o.estado = :estado"),
+=======
+    @NamedQuery(name = "Order1.findByDate", query = "SELECT o FROM Order1 o WHERE o.date = :date"),
+    @NamedQuery(name = "Order1.findByStatus", query = "SELECT o FROM Order1 o WHERE o.status = :status"),
+>>>>>>> Stashed changes
     @NamedQuery(name = "Order1.findByTotal", query = "SELECT o FROM Order1 o WHERE o.total = :total")})
 public class Order implements Serializable {
 
@@ -45,16 +50,26 @@ public class Order implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
+<<<<<<< Updated upstream
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     @Basic(optional = false)
     @Column(name = "estado")
     private String estado;
+=======
+    @Column(name = "date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+    @Basic(optional = false)
+    @Column(name = "status")
+    private String status;
+>>>>>>> Stashed changes
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "total")
     private BigDecimal total;
+<<<<<<< Updated upstream
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenId")
     private Collection<Pay> payCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenId")
@@ -71,6 +86,24 @@ public class Order implements Serializable {
     @JoinColumn(name = "mesero_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Users meseroId;
+=======
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+    private Collection<Pay> payCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+    private Collection<OrderDetails> orderDetailsCollection;
+    @JoinColumn(name = "box_id", referencedColumnName = "id")
+    @ManyToOne
+    private Box boxId;
+    @JoinColumn(name = "kitchen_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Kitchen kitchenId;
+    @JoinColumn(name = "table_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private co.edu.sena.restaurantjpa.model.Table tableId;
+    @JoinColumn(name = "waiter_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Users waiterId;
+>>>>>>> Stashed changes
 
     public Order() {
     }
@@ -79,10 +112,17 @@ public class Order implements Serializable {
         this.id = id;
     }
 
+<<<<<<< Updated upstream
     public Order(Long id, Date fecha, String estado, BigDecimal total) {
         this.id = id;
         this.fecha = fecha;
         this.estado = estado;
+=======
+    public Order(Long id, Date date, String status, BigDecimal total) {
+        this.id = id;
+        this.date = date;
+        this.status = status;
+>>>>>>> Stashed changes
         this.total = total;
     }
 
@@ -94,6 +134,7 @@ public class Order implements Serializable {
         this.id = id;
     }
 
+<<<<<<< Updated upstream
     public Date getFecha() {
         return fecha;
     }
@@ -108,6 +149,22 @@ public class Order implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+=======
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+>>>>>>> Stashed changes
     }
 
     public BigDecimal getTotal() {
@@ -134,6 +191,7 @@ public class Order implements Serializable {
         this.orderDetailsCollection = orderDetailsCollection;
     }
 
+<<<<<<< Updated upstream
     public Box getCajaId() {
         return cajaId;
     }
@@ -164,6 +222,38 @@ public class Order implements Serializable {
 
     public void setMeseroId(Users meseroId) {
         this.meseroId = meseroId;
+=======
+    public Box getBoxId() {
+        return boxId;
+    }
+
+    public void setBoxId(Box boxId) {
+        this.boxId = boxId;
+    }
+
+    public Kitchen getKitchenId() {
+        return kitchenId;
+    }
+
+    public void setKitchenId(Kitchen kitchenId) {
+        this.kitchenId = kitchenId;
+    }
+
+    public co.edu.sena.restaurantjpa.model.Table getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(co.edu.sena.restaurantjpa.model.Table tableId) {
+        this.tableId = tableId;
+    }
+
+    public Users getWaiterId() {
+        return waiterId;
+    }
+
+    public void setWaiterId(Users waiterId) {
+        this.waiterId = waiterId;
+>>>>>>> Stashed changes
     }
 
     @Override

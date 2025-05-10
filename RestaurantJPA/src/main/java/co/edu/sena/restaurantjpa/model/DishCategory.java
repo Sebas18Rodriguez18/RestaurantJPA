@@ -27,8 +27,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "DishCategory.findAll", query = "SELECT d FROM DishCategory d"),
     @NamedQuery(name = "DishCategory.findById", query = "SELECT d FROM DishCategory d WHERE d.id = :id"),
-    @NamedQuery(name = "DishCategory.findByNombre", query = "SELECT d FROM DishCategory d WHERE d.nombre = :nombre"),
-    @NamedQuery(name = "DishCategory.findByDescripcion", query = "SELECT d FROM DishCategory d WHERE d.descripcion = :descripcion")})
+    @NamedQuery(name = "DishCategory.findByName", query = "SELECT d FROM DishCategory d WHERE d.name = :name"),
+    @NamedQuery(name = "DishCategory.findByDescription", query = "SELECT d FROM DishCategory d WHERE d.description = :description")})
 public class DishCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,11 +38,11 @@ public class DishCategory implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "nombre")
-    private String nombre;
-    @Column(name = "descripcion")
-    private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoriaId")
+    @Column(name = "name")
+    private String name;
+    @Column(name = "description")
+    private String description;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
     private Collection<Dish> dishCollection;
 
     public DishCategory() {
@@ -52,9 +52,9 @@ public class DishCategory implements Serializable {
         this.id = id;
     }
 
-    public DishCategory(Long id, String nombre) {
+    public DishCategory(Long id, String name) {
         this.id = id;
-        this.nombre = nombre;
+        this.name = name;
     }
 
     public Long getId() {
@@ -65,20 +65,20 @@ public class DishCategory implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Collection<Dish> getDishCollection() {

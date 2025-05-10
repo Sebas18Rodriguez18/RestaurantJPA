@@ -29,10 +29,10 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Shift.findAll", query = "SELECT s FROM Shift s"),
     @NamedQuery(name = "Shift.findById", query = "SELECT s FROM Shift s WHERE s.id = :id"),
-    @NamedQuery(name = "Shift.findByFecha", query = "SELECT s FROM Shift s WHERE s.fecha = :fecha"),
-    @NamedQuery(name = "Shift.findByHoraEntrada", query = "SELECT s FROM Shift s WHERE s.horaEntrada = :horaEntrada"),
-    @NamedQuery(name = "Shift.findByHoraSalida", query = "SELECT s FROM Shift s WHERE s.horaSalida = :horaSalida"),
-    @NamedQuery(name = "Shift.findByEstado", query = "SELECT s FROM Shift s WHERE s.estado = :estado")})
+    @NamedQuery(name = "Shift.findByDate", query = "SELECT s FROM Shift s WHERE s.date = :date"),
+    @NamedQuery(name = "Shift.findByStartTime", query = "SELECT s FROM Shift s WHERE s.startTime = :startTime"),
+    @NamedQuery(name = "Shift.findByEndTime", query = "SELECT s FROM Shift s WHERE s.endTime = :endTime"),
+    @NamedQuery(name = "Shift.findByStatus", query = "SELECT s FROM Shift s WHERE s.status = :status")})
 public class Shift implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,22 +42,22 @@ public class Shift implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "fecha")
+    @Column(name = "date")
     @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private Date date;
     @Basic(optional = false)
-    @Column(name = "hora_entrada")
+    @Column(name = "start_time")
     @Temporal(TemporalType.TIME)
-    private Date horaEntrada;
-    @Column(name = "hora_salida")
+    private Date startTime;
+    @Column(name = "end_time")
     @Temporal(TemporalType.TIME)
-    private Date horaSalida;
+    private Date endTime;
     @Basic(optional = false)
-    @Column(name = "estado")
-    private String estado;
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @Column(name = "status")
+    private String status;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Users usuarioId;
+    private Users userId;
 
     public Shift() {
     }
@@ -66,11 +66,11 @@ public class Shift implements Serializable {
         this.id = id;
     }
 
-    public Shift(Long id, Date fecha, Date horaEntrada, String estado) {
+    public Shift(Long id, Date date, Date startTime, String status) {
         this.id = id;
-        this.fecha = fecha;
-        this.horaEntrada = horaEntrada;
-        this.estado = estado;
+        this.date = date;
+        this.startTime = startTime;
+        this.status = status;
     }
 
     public Long getId() {
@@ -81,44 +81,44 @@ public class Shift implements Serializable {
         this.id = id;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getDate() {
+        return date;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Date getHoraEntrada() {
-        return horaEntrada;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setHoraEntrada(Date horaEntrada) {
-        this.horaEntrada = horaEntrada;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
-    public Date getHoraSalida() {
-        return horaSalida;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setHoraSalida(Date horaSalida) {
-        this.horaSalida = horaSalida;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getStatus() {
+        return status;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Users getUsuarioId() {
-        return usuarioId;
+    public Users getUserId() {
+        return userId;
     }
 
-    public void setUsuarioId(Users usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
     @Override
