@@ -6,16 +6,16 @@
 </p>
 
 ---
-<picture> <img align="right" src="[https://github.com/7oSkaaa/7oSkaaa/blob/main/Images/Right_Side.gif?raw=true](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWRmb2V6M3IwanptYWt2YzF2cXZ3NjJlZmxiZXF3bWZrbWdxcWF3NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/97nl1jqh1L9qdRruHA/giphy.gif)" width="250px"></picture>
 
 ## 📌 ¿De que RestaurantJPA?
+<picture> <img align="right" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExemdlbXoyZDFiejFobWkycDlocDI4c2ZodDY4aGNodmphcXZuNnV4biZlcD12MV9naWZzX3NlYXJjaCZjdD1n/f3KwliaH4MLtli8z7D/giphy.gif" width="250px"></picture>
 
 > 🎯 **RestaurantJPA** es un proyecto académico desarrollado como parte del programa de **Análisis y Desarrollo de Software** en el **SENA CLEM (Centro Latinoamericano de Especies Menores)**.  
 >  
 > Este sistema está construido en **Java** usando la tecnología **JPA (Java Persistence API)** para interactuar con una base de datos **MySQL**, simulando el control operativo de un restaurante con operaciones básicas CRUD (Create, Read, Update y Delete).
+<br><br>
 
 ---
-
 ## ✨ Características Principales
 
 - 🔧 **Arquitectura limpia**: Separación clara de capas: Entidades, DAOs, Controladores.
@@ -95,8 +95,8 @@ El proyecto incluye **11 tablas relacionadas**, que permiten gestionar todo el f
  - 👨‍💻 Desarrollador principal
  - 📍 Colombia
  - 📬 GitHub
- - 📘 Técnico en Análisis y Desarrollo de Software – SENA
-  -📜 Licencia
+ - 📘 Técnologo en Análisis y Desarrollo de Software – SENA
+ - 📜 Licencia
  ## Este proyecto está bajo la licencia MIT License .
  ## Para más información, consulta el archivo LICENSE .
 
