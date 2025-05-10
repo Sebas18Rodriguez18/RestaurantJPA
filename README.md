@@ -8,7 +8,7 @@
 ---
 
 ## 📌 ¿De que RestaurantJPA?
-<picture> <img align="right" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExemdlbXoyZDFiejFobWkycDlocDI4c2ZodDY4aGNodmphcXZuNnV4biZlcD12MV9naWZzX3NlYXJjaCZjdD1n/f3KwliaH4MLtli8z7D/giphy.gif" width="250px"></picture>
+<picture> <img align="right" src="https://media.giphy.com/media/vOAwCEnMrX4u7zAJZs/giphy.gif?cid=ecf05e47ux7dtfzg3dxh4jsydsolu7sh70gs03f1lv3pp5sp&ep=v1_gifs_search&rid=giphy.gif&ct=g" width="250px"></picture>
 
 > 🎯 **RestaurantJPA** es un proyecto académico desarrollado como parte del programa de **Análisis y Desarrollo de Software** en el **SENA CLEM (Centro Latinoamericano de Especies Menores)**.  
 >  
