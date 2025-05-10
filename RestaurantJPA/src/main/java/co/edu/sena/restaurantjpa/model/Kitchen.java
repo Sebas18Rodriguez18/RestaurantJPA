@@ -29,8 +29,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Kitchen.findAll", query = "SELECT k FROM Kitchen k"),
     @NamedQuery(name = "Kitchen.findById", query = "SELECT k FROM Kitchen k WHERE k.id = :id"),
-    @NamedQuery(name = "Kitchen.findByNombre", query = "SELECT k FROM Kitchen k WHERE k.nombre = :nombre"),
-    @NamedQuery(name = "Kitchen.findByDescripcion", query = "SELECT k FROM Kitchen k WHERE k.descripcion = :descripcion")})
+    @NamedQuery(name = "Kitchen.findByName", query = "SELECT k FROM Kitchen k WHERE k.name = :name"),
+    @NamedQuery(name = "Kitchen.findByDescription", query = "SELECT k FROM Kitchen k WHERE k.description = :description")})
 public class Kitchen implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,14 +40,14 @@ public class Kitchen implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "nombre")
-    private String nombre;
-    @Column(name = "descripcion")
-    private String descripcion;
-    @JoinColumn(name = "encargado_id", referencedColumnName = "id")
+    @Column(name = "name")
+    private String name;
+    @Column(name = "description")
+    private String description;
+    @JoinColumn(name = "manager_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Users encargadoId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cocinaId")
+    private Users managerId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kitchenId")
     private Collection<Order> order1Collection;
 
     public Kitchen() {
@@ -57,9 +57,9 @@ public class Kitchen implements Serializable {
         this.id = id;
     }
 
-    public Kitchen(Long id, String nombre) {
+    public Kitchen(Long id, String name) {
         this.id = id;
-        this.nombre = nombre;
+        this.name = name;
     }
 
     public Long getId() {
@@ -70,28 +70,28 @@ public class Kitchen implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Users getEncargadoId() {
-        return encargadoId;
+    public Users getManagerId() {
+        return managerId;
     }
 
-    public void setEncargadoId(Users encargadoId) {
-        this.encargadoId = encargadoId;
+    public void setManagerId(Users managerId) {
+        this.managerId = managerId;
     }
 
     public Collection<Order> getOrder1Collection() {

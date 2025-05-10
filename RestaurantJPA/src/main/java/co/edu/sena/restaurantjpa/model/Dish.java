@@ -30,10 +30,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Dish.findAll", query = "SELECT d FROM Dish d"),
     @NamedQuery(name = "Dish.findById", query = "SELECT d FROM Dish d WHERE d.id = :id"),
-    @NamedQuery(name = "Dish.findByNombre", query = "SELECT d FROM Dish d WHERE d.nombre = :nombre"),
-    @NamedQuery(name = "Dish.findByDescripcion", query = "SELECT d FROM Dish d WHERE d.descripcion = :descripcion"),
-    @NamedQuery(name = "Dish.findByPrecio", query = "SELECT d FROM Dish d WHERE d.precio = :precio"),
-    @NamedQuery(name = "Dish.findByDisponible", query = "SELECT d FROM Dish d WHERE d.disponible = :disponible")})
+    @NamedQuery(name = "Dish.findByName", query = "SELECT d FROM Dish d WHERE d.name = :name"),
+    @NamedQuery(name = "Dish.findByDescription", query = "SELECT d FROM Dish d WHERE d.description = :description"),
+    @NamedQuery(name = "Dish.findByPrice", query = "SELECT d FROM Dish d WHERE d.price = :price"),
+    @NamedQuery(name = "Dish.findByAvailable", query = "SELECT d FROM Dish d WHERE d.available = :available")})
 public class Dish implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,21 +43,21 @@ public class Dish implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "nombre")
-    private String nombre;
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "description")
+    private String description;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @Column(name = "precio")
-    private BigDecimal precio;
+    @Column(name = "price")
+    private BigDecimal price;
     @Basic(optional = false)
-    @Column(name = "disponible")
-    private boolean disponible;
-    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
+    @Column(name = "available")
+    private boolean available;
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private DishCategory categoriaId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "platoId")
+    private DishCategory categoryId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dishId")
     private Collection<OrderDetails> orderDetailsCollection;
 
     public Dish() {
@@ -67,11 +67,11 @@ public class Dish implements Serializable {
         this.id = id;
     }
 
-    public Dish(Long id, String nombre, BigDecimal precio, boolean disponible) {
+    public Dish(Long id, String name, BigDecimal price, boolean available) {
         this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.disponible = disponible;
+        this.name = name;
+        this.price = price;
+        this.available = available;
     }
 
     public Long getId() {
@@ -82,44 +82,44 @@ public class Dish implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public BigDecimal getPrecio() {
-        return precio;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-    public boolean getDisponible() {
-        return disponible;
+    public boolean getAvailable() {
+        return available;
     }
 
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
-    public DishCategory getCategoriaId() {
-        return categoriaId;
+    public DishCategory getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoriaId(DishCategory categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setCategoryId(DishCategory categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Collection<OrderDetails> getOrderDetailsCollection() {

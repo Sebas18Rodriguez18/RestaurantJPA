@@ -22,14 +22,14 @@ USE `bdcook`;
 -- Volcando estructura para tabla bdcook.box
 CREATE TABLE IF NOT EXISTS `box` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `estado` varchar(50) NOT NULL,
-  `saldo_inicial` decimal(10,2) NOT NULL,
-  `saldo_actual` decimal(10,2) NOT NULL,
-  `cajero_id` bigint NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `initial_balance` decimal(10,2) NOT NULL,
+  `current_balance` decimal(10,2) NOT NULL,
+  `cashier_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_caja_users` (`cajero_id`),
-  CONSTRAINT `FK_caja_users` FOREIGN KEY (`cajero_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `FK_box_users` (`cashier_id`),
+  CONSTRAINT `FK_box_users` FOREIGN KEY (`cashier_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
@@ -37,14 +37,14 @@ CREATE TABLE IF NOT EXISTS `box` (
 -- Volcando estructura para tabla bdcook.dish
 CREATE TABLE IF NOT EXISTS `dish` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
-  `precio` decimal(10,2) NOT NULL,
-  `disponible` tinyint(1) NOT NULL,
-  `categoria_id` bigint NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `available` tinyint(1) NOT NULL,
+  `category_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_plato_categoria` (`categoria_id`),
-  CONSTRAINT `FK_plato_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `dish_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `FK_dish_category` (`category_id`),
+  CONSTRAINT `FK_dish_category` FOREIGN KEY (`category_id`) REFERENCES `dish_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `dish` (
 -- Volcando estructura para tabla bdcook.dish_category
 CREATE TABLE IF NOT EXISTS `dish_category` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `descripcion` varchar(100) DEFAULT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -62,12 +62,12 @@ CREATE TABLE IF NOT EXISTS `dish_category` (
 -- Volcando estructura para tabla bdcook.kitchen
 CREATE TABLE IF NOT EXISTS `kitchen` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `descripcion` varchar(100) DEFAULT NULL,
-  `encargado_id` bigint NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `manager_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_cocina_users` (`encargado_id`),
-  CONSTRAINT `FK_cocina_users` FOREIGN KEY (`encargado_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `FK_kitchen_users` (`manager_id`),
+  CONSTRAINT `FK_kitchen_users` FOREIGN KEY (`manager_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
@@ -75,22 +75,22 @@ CREATE TABLE IF NOT EXISTS `kitchen` (
 -- Volcando estructura para tabla bdcook.order
 CREATE TABLE IF NOT EXISTS `order` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `fecha` datetime NOT NULL,
-  `estado` varchar(50) NOT NULL,
+  `date` datetime NOT NULL,
+  `status` varchar(50) NOT NULL,
   `total` decimal(10,2) NOT NULL,
-  `mesa_id` bigint NOT NULL,
-  `mesero_id` bigint NOT NULL,
-  `cocina_id` bigint NOT NULL,
-  `caja_id` bigint DEFAULT NULL,
+  `table_id` bigint NOT NULL,
+  `waiter_id` bigint NOT NULL,
+  `kitchen_id` bigint NOT NULL,
+  `box_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_orden_mesa` (`mesa_id`),
-  KEY `FK_orden_users` (`mesero_id`),
-  KEY `FK_orden_cocina` (`cocina_id`),
-  KEY `FK_orden_caja` (`caja_id`),
-  CONSTRAINT `FK_orden_caja` FOREIGN KEY (`caja_id`) REFERENCES `box` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `FK_orden_cocina` FOREIGN KEY (`cocina_id`) REFERENCES `kitchen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_orden_mesa` FOREIGN KEY (`mesa_id`) REFERENCES `table` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_orden_users` FOREIGN KEY (`mesero_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `FK_order_table` (`table_id`),
+  KEY `FK_order_users` (`waiter_id`),
+  KEY `FK_order_kitchen` (`kitchen_id`),
+  KEY `FK_order_box` (`box_id`),
+  CONSTRAINT `FK_order_box` FOREIGN KEY (`box_id`) REFERENCES `box` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `FK_order_kitchen` FOREIGN KEY (`kitchen_id`) REFERENCES `kitchen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_order_table` FOREIGN KEY (`table_id`) REFERENCES `table` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_order_users` FOREIGN KEY (`waiter_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
@@ -98,17 +98,17 @@ CREATE TABLE IF NOT EXISTS `order` (
 -- Volcando estructura para tabla bdcook.order_details
 CREATE TABLE IF NOT EXISTS `order_details` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `orden_id` bigint NOT NULL,
-  `plato_id` bigint NOT NULL,
-  `cantidad` int NOT NULL,
-  `precio_unitario` decimal(10,2) NOT NULL,
+  `order_id` bigint NOT NULL,
+  `dish_id` bigint NOT NULL,
+  `quantity` int NOT NULL,
+  `unit_price` decimal(10,2) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL,
-  `observaciones` varchar(255) DEFAULT NULL,
+  `observations` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_detalle_orden_orden` (`orden_id`),
-  KEY `FK_detalle_orden_plato` (`plato_id`),
-  CONSTRAINT `FK_detalle_orden_orden` FOREIGN KEY (`orden_id`) REFERENCES `order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_detalle_orden_plato` FOREIGN KEY (`plato_id`) REFERENCES `dish` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `FK_order_details_order` (`order_id`),
+  KEY `FK_order_details_dish` (`dish_id`),
+  CONSTRAINT `FK_order_details_dish` FOREIGN KEY (`dish_id`) REFERENCES `dish` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_order_details_order` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
@@ -116,16 +116,16 @@ CREATE TABLE IF NOT EXISTS `order_details` (
 -- Volcando estructura para tabla bdcook.pay
 CREATE TABLE IF NOT EXISTS `pay` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `orden_id` bigint NOT NULL,
-  `metodo_pago` varchar(50) NOT NULL,
-  `monto` decimal(10,2) NOT NULL,
-  `fecha_pago` datetime NOT NULL,
-  `caja_id` bigint NOT NULL,
+  `order_id` bigint NOT NULL,
+  `payment_method` varchar(50) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `payment_date` datetime NOT NULL,
+  `box_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_pago_orden` (`orden_id`),
-  KEY `FK_pago_caja` (`caja_id`),
-  CONSTRAINT `FK_pago_caja` FOREIGN KEY (`caja_id`) REFERENCES `box` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_pago_orden` FOREIGN KEY (`orden_id`) REFERENCES `order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `FK_pay_order` (`order_id`),
+  KEY `FK_pay_box` (`box_id`),
+  CONSTRAINT `FK_pay_box` FOREIGN KEY (`box_id`) REFERENCES `box` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_pay_order` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
@@ -142,14 +142,14 @@ CREATE TABLE IF NOT EXISTS `roles` (
 -- Volcando estructura para tabla bdcook.shift
 CREATE TABLE IF NOT EXISTS `shift` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `usuario_id` bigint NOT NULL,
-  `fecha` date NOT NULL,
-  `hora_entrada` time NOT NULL,
-  `hora_salida` time DEFAULT NULL,
-  `estado` varchar(50) NOT NULL,
+  `user_id` bigint NOT NULL,
+  `date` date NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time DEFAULT NULL,
+  `status` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_turno_users` (`usuario_id`),
-  CONSTRAINT `FK_turno_users` FOREIGN KEY (`usuario_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `FK_shift_users` (`user_id`),
+  CONSTRAINT `FK_shift_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
@@ -157,9 +157,9 @@ CREATE TABLE IF NOT EXISTS `shift` (
 -- Volcando estructura para tabla bdcook.table
 CREATE TABLE IF NOT EXISTS `table` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `numero` int NOT NULL,
-  `capacidad` int NOT NULL,
-  `estado` varchar(50) NOT NULL,
+  `number` int NOT NULL,
+  `capacity` int NOT NULL,
+  `status` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `table` (
 -- Volcando estructura para tabla bdcook.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `fullname` varchar(50) NOT NULL,
+  `full_name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL,
@@ -182,12 +182,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Volcando estructura para tabla bdcook.waiter_table
 CREATE TABLE IF NOT EXISTS `waiter_table` (
-  `mesero_id` bigint NOT NULL,
-  `mesa_id` bigint NOT NULL,
-  PRIMARY KEY (`mesero_id`,`mesa_id`),
-  KEY `FK_mesero_mesa_mesa` (`mesa_id`),
-  CONSTRAINT `FK_mesero_mesa_mesa` FOREIGN KEY (`mesa_id`) REFERENCES `table` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_mesero_mesa_users` FOREIGN KEY (`mesero_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `waiter_id` bigint NOT NULL,
+  `table_id` bigint NOT NULL,
+  PRIMARY KEY (`waiter_id`,`table_id`),
+  KEY `FK_waiter_table_table` (`table_id`),
+  CONSTRAINT `FK_waiter_table_table` FOREIGN KEY (`table_id`) REFERENCES `table` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_waiter_table_users` FOREIGN KEY (`waiter_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- La exportación de datos fue deseleccionada.

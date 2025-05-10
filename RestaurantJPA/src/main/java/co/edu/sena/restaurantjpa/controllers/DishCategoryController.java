@@ -5,10 +5,11 @@
 package co.edu.sena.restaurantjpa.controllers;
 
 import co.edu.sena.restaurantjpa.model.DishCategory;
+import co.edu.sena.restaurantjpa.persistence.DAOFactory;
 import java.util.List;
 
 /**
- * Fecha: 08/05/2025
+ * Fecha: 11/05/2025
  * @author Juan Sebastian Rodriguez Cruz
  * Objetivo: Implementar la interface para controlar el modelo DishCategory.
  */
@@ -33,7 +34,7 @@ public class DishCategoryController implements IDishCategoryController{
 
     @Override
     public List<DishCategory> findAll() throws Exception {
-        return null;
+        return DAOFactory.getCategoryDAO().findAll();
     }
     
 }

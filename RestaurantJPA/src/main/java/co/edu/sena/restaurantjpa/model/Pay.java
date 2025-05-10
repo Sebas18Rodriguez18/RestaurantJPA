@@ -30,9 +30,9 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Pay.findAll", query = "SELECT p FROM Pay p"),
     @NamedQuery(name = "Pay.findById", query = "SELECT p FROM Pay p WHERE p.id = :id"),
-    @NamedQuery(name = "Pay.findByMetodoPago", query = "SELECT p FROM Pay p WHERE p.metodoPago = :metodoPago"),
-    @NamedQuery(name = "Pay.findByMonto", query = "SELECT p FROM Pay p WHERE p.monto = :monto"),
-    @NamedQuery(name = "Pay.findByFechaPago", query = "SELECT p FROM Pay p WHERE p.fechaPago = :fechaPago")})
+    @NamedQuery(name = "Pay.findByPaymentMethod", query = "SELECT p FROM Pay p WHERE p.paymentMethod = :paymentMethod"),
+    @NamedQuery(name = "Pay.findByAmount", query = "SELECT p FROM Pay p WHERE p.amount = :amount"),
+    @NamedQuery(name = "Pay.findByPaymentDate", query = "SELECT p FROM Pay p WHERE p.paymentDate = :paymentDate")})
 public class Pay implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,22 +42,22 @@ public class Pay implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "metodo_pago")
-    private String metodoPago;
+    @Column(name = "payment_method")
+    private String paymentMethod;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @Column(name = "monto")
-    private BigDecimal monto;
+    @Column(name = "amount")
+    private BigDecimal amount;
     @Basic(optional = false)
-    @Column(name = "fecha_pago")
+    @Column(name = "payment_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaPago;
-    @JoinColumn(name = "caja_id", referencedColumnName = "id")
+    private Date paymentDate;
+    @JoinColumn(name = "box_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Box cajaId;
-    @JoinColumn(name = "orden_id", referencedColumnName = "id")
+    private Box boxId;
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Order ordenId;
+    private Order orderId;
 
     public Pay() {
     }
@@ -66,11 +66,11 @@ public class Pay implements Serializable {
         this.id = id;
     }
 
-    public Pay(Long id, String metodoPago, BigDecimal monto, Date fechaPago) {
+    public Pay(Long id, String paymentMethod, BigDecimal amount, Date paymentDate) {
         this.id = id;
-        this.metodoPago = metodoPago;
-        this.monto = monto;
-        this.fechaPago = fechaPago;
+        this.paymentMethod = paymentMethod;
+        this.amount = amount;
+        this.paymentDate = paymentDate;
     }
 
     public Long getId() {
@@ -81,44 +81,44 @@ public class Pay implements Serializable {
         this.id = id;
     }
 
-    public String getMetodoPago() {
-        return metodoPago;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setMetodoPago(String metodoPago) {
-        this.metodoPago = metodoPago;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
-    public BigDecimal getMonto() {
-        return monto;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
-    public Date getFechaPago() {
-        return fechaPago;
+    public Date getPaymentDate() {
+        return paymentDate;
     }
 
-    public void setFechaPago(Date fechaPago) {
-        this.fechaPago = fechaPago;
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
-    public Box getCajaId() {
-        return cajaId;
+    public Box getBoxId() {
+        return boxId;
     }
 
-    public void setCajaId(Box cajaId) {
-        this.cajaId = cajaId;
+    public void setBoxId(Box boxId) {
+        this.boxId = boxId;
     }
 
-    public Order getOrdenId() {
-        return ordenId;
+    public Order getOrderId() {
+        return orderId;
     }
 
-    public void setOrdenId(Order ordenId) {
-        this.ordenId = ordenId;
+    public void setOrderId(Order orderId) {
+        this.orderId = orderId;
     }
 
     @Override
