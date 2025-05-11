@@ -7,7 +7,11 @@
 
 ---
 
+<<<<<<< HEAD
 ## 📌 ¿De que trata RestaurantJPA?
+=======
+## 📌 ¿De que RestaurantJPA?
+>>>>>>> origin/dev
 <picture> <img align="right" src="https://media.giphy.com/media/vOAwCEnMrX4u7zAJZs/giphy.gif?cid=ecf05e47ux7dtfzg3dxh4jsydsolu7sh70gs03f1lv3pp5sp&ep=v1_gifs_search&rid=giphy.gif&ct=g" width="250px"></picture>
 
 > 🎯 **RestaurantJPA** es un proyecto académico desarrollado como parte del programa de **Análisis y Desarrollo de Software** en el **SENA CLEM (Centro Latinoamericano de Especies Menores)**.  
