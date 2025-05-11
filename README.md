@@ -109,8 +109,8 @@ El proyecto incluye **11 tablas relacionadas**, que permiten gestionar todo el f
     <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
   </a>
   &nbsp;
-  <a href="https://wa.me/573188532916" target="_blank">
-    <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
+  <a href="https://t.me/SebasDevCruz26" target="_blank">
+    <img src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram">
   </a>
   &nbsp;
   <a href="https://www.instagram.com/srcj_26/" target="_blank">
