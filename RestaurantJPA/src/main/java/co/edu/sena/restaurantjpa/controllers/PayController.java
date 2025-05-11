@@ -17,12 +17,7 @@ public class PayController implements IPayController{
 
     @Override
     public void insert(Pay pay) throws Exception {
-if(pay == null){
-throw new Exception("El pago es nulo");
-}
-if(pay.){
-
-}
+        
     }
 
     @Override
