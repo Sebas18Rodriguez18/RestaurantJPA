@@ -8,12 +8,13 @@
 ---
 
 ## 📌 ¿De que trata RestaurantJPA?
-<picture> <img align="right" src="https://media.giphy.com/media/vOAwCEnMrX4u7zAJZs/giphy.gif?cid=ecf05e47ux7dtfzg3dxh4jsydsolu7sh70gs03f1lv3pp5sp&ep=v1_gifs_search&rid=giphy.gif&ct=g" width="250px"></picture>
+<picture> <img align="right" src="https://github.com/Sebas18Rodriguez18/RestaurantJPA/blob/main/logo2.png.png" width="220px"></picture>
 
 > 🎯 **RestaurantJPA** es un proyecto académico desarrollado como parte del programa de **Análisis y Desarrollo de Software** en el **SENA CLEM (Centro Latinoamericano de Especies Menores)**.  
 >  
 > Este sistema está construido en **Java** usando la tecnología **JPA (Java Persistence API)** para interactuar con una base de datos **MySQL**, simulando el control operativo de un restaurante con operaciones básicas CRUD (Create, Read, Update y Delete).
 <br><br>
+
 
 ---
 ## ✨ Características Principales
