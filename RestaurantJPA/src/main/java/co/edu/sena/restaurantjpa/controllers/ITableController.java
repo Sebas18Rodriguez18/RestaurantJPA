@@ -4,7 +4,7 @@
  */
 package co.edu.sena.restaurantjpa.controllers;
 
-import co.edu.sena.restaurantjpa.model.Table;
+import co.edu.sena.restaurantjpa.model.DiningTable;
 import java.util.List;
 
 /**
@@ -13,9 +13,9 @@ import java.util.List;
  * Objetivo: Interface para el modelo de Table
  */
 public interface ITableController {
-    public void insert(Table table) throws Exception;
-    public void update(Table table) throws Exception;
-    public void delete(Table table) throws Exception;
-    public Table findById(Long id) throws Exception;
-    public List<Table> findAll() throws Exception;
+    public void insert(DiningTable table) throws Exception;
+    public void update(DiningTable table) throws Exception;
+    public void delete(DiningTable tablee) throws Exception;
+    public DiningTable findById(Long id) throws Exception;
+    public List<DiningTable> findAll() throws Exception;
 }

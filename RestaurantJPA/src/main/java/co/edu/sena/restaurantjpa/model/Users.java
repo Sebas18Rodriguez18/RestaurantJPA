@@ -55,7 +55,7 @@ public class Users implements Serializable {
     @Column(name = "status")
     private String status;
     @ManyToMany(mappedBy = "usersCollection")
-    private Collection<co.edu.sena.restaurantjpa.model.Table> tableCollection;
+    private Collection<co.edu.sena.restaurantjpa.model.DiningTable> tableCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Shift> shiftCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cashierId")
@@ -66,7 +66,7 @@ public class Users implements Serializable {
     @ManyToOne(optional = false)
     private Roles roleId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "waiterId")
-    private Collection<Order> order1Collection;
+    private Collection<Order1> order1Collection;
 
     public Users() {
     }
@@ -123,11 +123,11 @@ public class Users implements Serializable {
         this.status = status;
     }
 
-    public Collection<co.edu.sena.restaurantjpa.model.Table> getTableCollection() {
+    public Collection<co.edu.sena.restaurantjpa.model.DiningTable> getTableCollection() {
         return tableCollection;
     }
 
-    public void setTableCollection(Collection<co.edu.sena.restaurantjpa.model.Table> tableCollection) {
+    public void setTableCollection(Collection<co.edu.sena.restaurantjpa.model.DiningTable> tableCollection) {
         this.tableCollection = tableCollection;
     }
 
@@ -163,11 +163,11 @@ public class Users implements Serializable {
         this.roleId = roleId;
     }
 
-    public Collection<Order> getOrder1Collection() {
+    public Collection<Order1> getOrder1Collection() {
         return order1Collection;
     }
 
-    public void setOrder1Collection(Collection<Order> order1Collection) {
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
         this.order1Collection = order1Collection;
     }
 

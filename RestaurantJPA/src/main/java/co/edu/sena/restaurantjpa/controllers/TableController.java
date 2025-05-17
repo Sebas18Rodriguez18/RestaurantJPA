@@ -5,9 +5,10 @@
 package co.edu.sena.restaurantjpa.controllers;
 
 import java.util.List;
-import co.edu.sena.restaurantjpa.model.Table;
+import co.edu.sena.restaurantjpa.model.DiningTable;
 import co.edu.sena.restaurantjpa.persistence.DAOFactory;
 import co.edu.sena.restaurantjpa.persistence.EntityManagerHelper;
+import javax.persistence.Table;
 
 /**
  * Fecha: 09/05/2025
@@ -17,7 +18,7 @@ import co.edu.sena.restaurantjpa.persistence.EntityManagerHelper;
 public class TableController implements ITableController{
 
     @Override
-    public void insert(Table table) throws Exception {
+    public void insert(DiningTable table) throws Exception {
         if (table == null) {
             throw new Exception("La mesa es nula");
         }
@@ -38,7 +39,7 @@ public class TableController implements ITableController{
     }
 
     @Override
-    public void update(Table table) throws Exception {
+    public void update(DiningTable table) throws Exception {
         if (table == null) {
             throw new Exception("La mesa es nula");
         }
@@ -56,7 +57,7 @@ public class TableController implements ITableController{
         }
         
          //Consultar si la carrera existe en la bd.
-         Table tableExist = DAOFactory.getTableDAO().findById(table.getId());
+         DiningTable tableExist = DAOFactory.getTableDAO().findById(table.getId());
          if(tableExist == null)
         {
             throw new Exception("la mesa no existe");
@@ -76,13 +77,13 @@ public class TableController implements ITableController{
     }
 
     @Override
-    public void delete(Table table) throws Exception {
+    public void delete(DiningTable table) throws Exception {
         if (table == null ||  table.getId() == null || table.getId() <= 0) {
             throw new Exception("El ID del usuario es obligatorio y debe ser mayor a 0.");
         }
         
         // Verificar si el usuario existe
-        Table tableExist = DAOFactory.getTableDAO().findById(table.getId());
+        DiningTable tableExist = DAOFactory.getTableDAO().findById(table.getId());
         if (tableExist == null) {
             throw new Exception("La mesa con ese ID " + table.getId() + " no existe.");
         }
@@ -95,12 +96,12 @@ public class TableController implements ITableController{
     }
 
     @Override
-    public Table findById(Long id) throws Exception {
+    public DiningTable findById(Long id) throws Exception {
         if (id == null || id <= 0) {
             throw new Exception("El ID del usuario es obligatorio y debe ser mayor a 0.");
         }
 
-        Table tableExist = DAOFactory.getTableDAO().findById(id);
+        DiningTable tableExist = DAOFactory.getTableDAO().findById(id);
         if (tableExist == null) {
             throw new Exception("El usuario con ID " + id + " no existe.");
         }
@@ -109,7 +110,7 @@ public class TableController implements ITableController{
     }
 
     @Override
-    public List<Table> findAll() throws Exception {
+    public List<DiningTable> findAll() throws Exception {
         return DAOFactory.getTableDAO().findAll();
     }
     

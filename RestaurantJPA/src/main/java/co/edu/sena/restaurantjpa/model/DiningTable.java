@@ -27,12 +27,12 @@ import javax.persistence.OneToMany;
 @Entity
 @javax.persistence.Table(name = "table")
 @NamedQueries({
-    @NamedQuery(name = "Table.findAll", query = "SELECT t FROM Table t"),
-    @NamedQuery(name = "Table.findById", query = "SELECT t FROM Table t WHERE t.id = :id"),
-    @NamedQuery(name = "Table.findByNumber", query = "SELECT t FROM Table t WHERE t.number = :number"),
-    @NamedQuery(name = "Table.findByCapacity", query = "SELECT t FROM Table t WHERE t.capacity = :capacity"),
-    @NamedQuery(name = "Table.findByStatus", query = "SELECT t FROM Table t WHERE t.status = :status")})
-public class Table implements Serializable {
+    @NamedQuery(name = "DiningTable.findAll", query = "SELECT t FROM DiningTable t"),
+    @NamedQuery(name = "DiningTable.findById", query = "SELECT t FROM DiningTable t WHERE t.id = :id"),
+    @NamedQuery(name = "DiningTable.findByNumber", query = "SELECT t FROM DiningTable t WHERE t.number = :number"),
+    @NamedQuery(name = "DiningTable.findByCapacity", query = "SELECT t FROM DiningTable t WHERE t.capacity = :capacity"),
+    @NamedQuery(name = "DiningTable.findByStatus", query = "SELECT t FROM DiningTable t WHERE t.status = :status")})
+public class DiningTable implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,16 +55,16 @@ public class Table implements Serializable {
     @ManyToMany
     private Collection<Users> usersCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tableId")
-    private Collection<Order> order1Collection;
+    private Collection<Order1> order1Collection;
 
-    public Table() {
+    public DiningTable() {
     }
 
-    public Table(Long id) {
+    public DiningTable(Long id) {
         this.id = id;
     }
 
-    public Table(Long id, int number, int capacity, String status) {
+    public DiningTable(Long id, int number, int capacity, String status) {
         this.id = id;
         this.number = number;
         this.capacity = capacity;
@@ -111,11 +111,11 @@ public class Table implements Serializable {
         this.usersCollection = usersCollection;
     }
 
-    public Collection<Order> getOrder1Collection() {
+    public Collection<Order1> getOrder1Collection() {
         return order1Collection;
     }
 
-    public void setOrder1Collection(Collection<Order> order1Collection) {
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
         this.order1Collection = order1Collection;
     }
 
@@ -129,10 +129,10 @@ public class Table implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Table)) {
+        if (!(object instanceof DiningTable)) {
             return false;
         }
-        Table other = (Table) object;
+        DiningTable other = (DiningTable) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -141,7 +141,7 @@ public class Table implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.sena.restaurantjpa.model.Table[ id=" + id + " ]";
+        return "co.edu.sena.restaurantjpa.model.DiningTable[ id=" + id + " ]";
     }
     
 }

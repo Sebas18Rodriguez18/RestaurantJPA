@@ -4,7 +4,7 @@
  */
 package co.edu.sena.restaurantjpa.persistence;
 
-import co.edu.sena.restaurantjpa.model.Table;
+import co.edu.sena.restaurantjpa.model.DiningTable;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -16,7 +16,7 @@ import javax.persistence.Query;
 public class TableDAO implements ITableDAO {
 
     @Override
-    public void insert(Table table) throws Exception {
+    public void insert(DiningTable table) throws Exception {
         try {
             EntityManagerHelper.getEntityManager().persist(table);
         } catch (RuntimeException e) {
@@ -25,7 +25,7 @@ public class TableDAO implements ITableDAO {
     }
 
     @Override
-    public void update(Table table) throws Exception {
+    public void update(DiningTable table) throws Exception {
         try {
             EntityManagerHelper.getEntityManager().merge(table);
         } catch (RuntimeException e) {
@@ -34,7 +34,7 @@ public class TableDAO implements ITableDAO {
     }
 
     @Override
-    public void delete(Table table) throws Exception {
+    public void delete(DiningTable table) throws Exception {
         try {
             EntityManagerHelper.getEntityManager().remove(table);
         } catch (RuntimeException e) {
@@ -43,16 +43,16 @@ public class TableDAO implements ITableDAO {
     }
 
     @Override
-    public Table findById(Long id) throws Exception {
+    public DiningTable findById(Long id) throws Exception {
         try {
-            return EntityManagerHelper.getEntityManager().find(Table.class, id);
+            return EntityManagerHelper.getEntityManager().find(DiningTable.class, id);
         } catch (RuntimeException e) {
             throw e;
         }
     }
 
     @Override
-    public List<Table> findAll() throws Exception {
+    public List<DiningTable> findAll() throws Exception {
         try {
             Query query = EntityManagerHelper.getEntityManager().createNamedQuery("Table.findAll");
             return query.getResultList();

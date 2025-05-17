@@ -61,7 +61,7 @@ public class Box implements Serializable {
     @ManyToOne(optional = false)
     private Users cashierId;
     @OneToMany(mappedBy = "boxId")
-    private Collection<Order> order1Collection;
+    private Collection<Order1> order1Collection;
 
     public Box() {
     }
@@ -134,11 +134,11 @@ public class Box implements Serializable {
         this.cashierId = cashierId;
     }
 
-    public Collection<Order> getOrder1Collection() {
+    public Collection<Order1> getOrder1Collection() {
         return order1Collection;
     }
 
-    public void setOrder1Collection(Collection<Order> order1Collection) {
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
         this.order1Collection = order1Collection;
     }
 

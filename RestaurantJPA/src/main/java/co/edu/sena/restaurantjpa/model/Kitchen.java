@@ -48,7 +48,7 @@ public class Kitchen implements Serializable {
     @ManyToOne(optional = false)
     private Users managerId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "kitchenId")
-    private Collection<Order> order1Collection;
+    private Collection<Order1> order1Collection;
 
     public Kitchen() {
     }
@@ -94,11 +94,11 @@ public class Kitchen implements Serializable {
         this.managerId = managerId;
     }
 
-    public Collection<Order> getOrder1Collection() {
+    public Collection<Order1> getOrder1Collection() {
         return order1Collection;
     }
 
-    public void setOrder1Collection(Collection<Order> order1Collection) {
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
         this.order1Collection = order1Collection;
     }
 

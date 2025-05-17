@@ -56,7 +56,7 @@ public class OrderDetails implements Serializable {
     private Dish dishId;
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Order orderId;
+    private Order1 orderId;
 
     public OrderDetails() {
     }
@@ -120,11 +120,11 @@ public class OrderDetails implements Serializable {
         this.dishId = dishId;
     }
 
-    public Order getOrderId() {
+    public Order1 getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Order orderId) {
+    public void setOrderId(Order1 orderId) {
         this.orderId = orderId;
     }
 

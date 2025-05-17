@@ -4,7 +4,7 @@
  */
 package co.edu.sena.restaurantjpa.controllers;
 
-import co.edu.sena.restaurantjpa.model.Order;
+import co.edu.sena.restaurantjpa.model.Order1;
 import co.edu.sena.restaurantjpa.persistence.DAOFactory;
 import co.edu.sena.restaurantjpa.persistence.EntityManagerHelper;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 public class OrderController implements IOrderController {
 
     @Override
-    public void insert(Order order) throws Exception {
+    public void insert(Order1 order) throws Exception {
         if (order == null) {
             throw new Exception("El pedido es nulo");
         }
@@ -52,7 +52,7 @@ public class OrderController implements IOrderController {
     }
 
     @Override
-    public void update(Order order) throws Exception {
+    public void update(Order1 order) throws Exception {
         if (order == null) {
             throw new Exception("El pedido es nulo");
         }
@@ -84,7 +84,7 @@ public class OrderController implements IOrderController {
         }
 
         // Verificar si el pedido existe en la base de datos
-        Order orderExist = DAOFactory.getOrderDAO().findById(order.getId());
+        Order1 orderExist = DAOFactory.getOrderDAO().findById(order.getId());
         if (orderExist == null) {
             throw new Exception("El pedido con ID " + order.getId() + " no existe.");
         }
@@ -105,13 +105,13 @@ public class OrderController implements IOrderController {
     }
 
     @Override
-    public void delete(Order order) throws Exception {
+    public void delete(Order1 order) throws Exception {
         if (order == null || order.getId() == null || order.getId() <= 0) {
             throw new Exception("El ID del pedido es obligatorio y debe ser mayor a 0.");
         }
 
         // Verificar si el pedido existe
-        Order orderExist = DAOFactory.getOrderDAO().findById(order.getId());
+        Order1 orderExist = DAOFactory.getOrderDAO().findById(order.getId());
         if (orderExist == null) {
             throw new Exception("El pedido con ID " + order.getId() + " no existe.");
         }
@@ -124,12 +124,12 @@ public class OrderController implements IOrderController {
     }
 
     @Override
-    public Order findById(Long id) throws Exception {
+    public Order1 findById(Long id) throws Exception {
         if (id == null || id <= 0) {
             throw new Exception("El ID del pedido es obligatorio y debe ser mayor a 0.");
         }
 
-        Order orderExist = DAOFactory.getOrderDAO().findById(id);
+        Order1 orderExist = DAOFactory.getOrderDAO().findById(id);
         if (orderExist == null) {
             throw new Exception("El pedido con ID " + id + " no existe.");
         }
@@ -138,7 +138,7 @@ public class OrderController implements IOrderController {
     }
 
     @Override
-    public List<Order> findAll() throws Exception {
+    public List<Order1> findAll() throws Exception {
         return DAOFactory.getOrderDAO().findAll();
     }
 }

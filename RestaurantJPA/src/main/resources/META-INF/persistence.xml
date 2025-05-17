@@ -12,7 +12,8 @@
     <class>co.edu.sena.restaurantjpa.model.Roles</class>
     <class>co.edu.sena.restaurantjpa.model.Box</class>
     <class>co.edu.sena.restaurantjpa.model.Users</class>
-    <class>co.edu.sena.restaurantjpa.model.Order</class>
+    <class>co.edu.sena.restaurantjpa.model.Order1</class>
+    <class>co.edu.sena.restaurantjpa.model.DiningTable</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdcook?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="developer"/>

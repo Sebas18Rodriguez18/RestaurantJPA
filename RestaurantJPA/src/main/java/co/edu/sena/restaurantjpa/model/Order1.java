@@ -31,12 +31,12 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "order")
 @NamedQueries({
-    @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order1 o"),
-    @NamedQuery(name = "Order.findById", query = "SELECT o FROM Order1 o WHERE o.id = :id"),
-    @NamedQuery(name = "Order.findByDate", query = "SELECT o FROM Order1 o WHERE o.date = :date"),
-    @NamedQuery(name = "Order.findByStatus", query = "SELECT o FROM Order1 o WHERE o.status = :status"),
-    @NamedQuery(name = "Order.findByTotal", query = "SELECT o FROM Order1 o WHERE o.total = :total")})
-public class Order implements Serializable {
+    @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o"),
+    @NamedQuery(name = "Order1.findById", query = "SELECT o FROM Order1 o WHERE o.id = :id"),
+    @NamedQuery(name = "Order1.findByDate", query = "SELECT o FROM Order1 o WHERE o.date = :date"),
+    @NamedQuery(name = "Order1.findByStatus", query = "SELECT o FROM Order1 o WHERE o.status = :status"),
+    @NamedQuery(name = "Order1.findByTotal", query = "SELECT o FROM Order1 o WHERE o.total = :total")})
+public class Order1 implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -67,19 +67,19 @@ public class Order implements Serializable {
     private Kitchen kitchenId;
     @JoinColumn(name = "table_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private co.edu.sena.restaurantjpa.model.Table tableId;
+    private co.edu.sena.restaurantjpa.model.DiningTable tableId;
     @JoinColumn(name = "waiter_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Users waiterId;
 
-    public Order() {
+    public Order1() {
     }
 
-    public Order(Long id) {
+    public Order1(Long id) {
         this.id = id;
     }
 
-    public Order(Long id, Date date, String status, BigDecimal total) {
+    public Order1(Long id, Date date, String status, BigDecimal total) {
         this.id = id;
         this.date = date;
         this.status = status;
@@ -150,11 +150,11 @@ public class Order implements Serializable {
         this.kitchenId = kitchenId;
     }
 
-    public co.edu.sena.restaurantjpa.model.Table getTableId() {
+    public co.edu.sena.restaurantjpa.model.DiningTable getTableId() {
         return tableId;
     }
 
-    public void setTableId(co.edu.sena.restaurantjpa.model.Table tableId) {
+    public void setTableId(co.edu.sena.restaurantjpa.model.DiningTable tableId) {
         this.tableId = tableId;
     }
 
@@ -176,10 +176,10 @@ public class Order implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Order)) {
+        if (!(object instanceof Order1)) {
             return false;
         }
-        Order other = (Order) object;
+        Order1 other = (Order1) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

@@ -5,7 +5,7 @@
 package co.edu.sena.restaurantjpa.persistence;
 
 import java.util.List;
-import co.edu.sena.restaurantjpa.model.Table;
+import co.edu.sena.restaurantjpa.model.DiningTable;
 
 /**
  * Fecha: 07/05/2025
@@ -13,9 +13,9 @@ import co.edu.sena.restaurantjpa.model.Table;
  * Objetivo: Interface para DAO de Table
  */
 public interface ITableDAO {
-    public void insert(Table table) throws Exception;
-    public void update(Table table) throws Exception;
-    public void delete(Table table) throws Exception;
-    public Table findById(Long id) throws Exception;
-    public List<Table> findAll() throws Exception;
+    public void insert(DiningTable table) throws Exception;
+    public void update(DiningTable table) throws Exception;
+    public void delete(DiningTable table) throws Exception;
+    public DiningTable findById(Long id) throws Exception;
+    public List<DiningTable> findAll() throws Exception;
 }
