@@ -7,13 +7,19 @@
 
 ---
 
+<<<<<<< HEAD
 ## 📌 ¿De que RestaurantJPA?
 <picture> <img align="right" src="https://github.com/Sebas18Rodriguez18/Sebas18Rodriguez18/blob/main/logoClass.png" width="250px"></picture>
+=======
+## 📌 ¿De que trata RestaurantJPA?
+<picture> <img align="right" src="https://github.com/Sebas18Rodriguez18/Sebas18Rodriguez18/blob/main/logoClass.png" width="220px"></picture>
+>>>>>>> origin/main
 
 > 🎯 **RestaurantJPA** es un proyecto académico desarrollado como parte del programa de **Análisis y Desarrollo de Software** en el **SENA CLEM (Centro Latinoamericano de Especies Menores)**.  
 >  
 > Este sistema está construido en **Java** usando la tecnología **JPA (Java Persistence API)** para interactuar con una base de datos **MySQL**, simulando el control operativo de un restaurante con operaciones básicas CRUD (Create, Read, Update y Delete).
 <br><br>
+
 
 ---
 ## ✨ Características Principales
@@ -109,8 +115,8 @@ El proyecto incluye **11 tablas relacionadas**, que permiten gestionar todo el f
     <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
   </a>
   &nbsp;
-  <a href="https://wa.me/573188532916" target="_blank">
-    <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
+  <a href="https://t.me/SebasDevCruz26" target="_blank">
+    <img src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram">
   </a>
   &nbsp;
   <a href="https://www.instagram.com/srcj_26/" target="_blank">
