@@ -8,6 +8,7 @@ import co.edu.sena.restaurantjpa.controllers.IRolesController;
 import co.edu.sena.restaurantjpa.controllers.IUsersController;
 import co.edu.sena.restaurantjpa.controllers.RolesController;
 import co.edu.sena.restaurantjpa.controllers.UsersController;
+import co.edu.sena.restaurantjpa.model.Roles;
 import co.edu.sena.restaurantjpa.model.Users;
 import co.edu.sena.restaurantjpa.util.MessageUtils;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -77,6 +79,12 @@ public class JFrameAdmin extends javax.swing.JFrame {
             model.addElement("ACTIVO");
             model.addElement("INACTIVO");
             jComboBoxStatusUser.setModel(model);
+            
+            DefaultComboBoxModel<Roles> roleModel = new DefaultComboBoxModel<>();
+            for (Roles r : rolesController.findAll()) {
+                roleModel.addElement(r);
+            }
+            jComboBoxRoleUser.setModel(roleModel);
         } catch (Exception e) {
             MessageUtils.ShowErrorMessage(e.getMessage());
         }
@@ -108,10 +116,14 @@ public class JFrameAdmin extends javax.swing.JFrame {
     private void cleanUserFields() {
         jTextFieldIdUser.setText("");
         jTextFieldFullnameUser.setText("");
-        jTextFieldLastnameEmail.setText("");
-        jTextFieldRoleUser.setText("");
+        jTextFieldEmailUsers.setText("");
         jComboBoxStatusUser.setSelectedIndex(0);
+        jComboBoxRoleUser.setSelectedIndex(0);
         jTableUser.clearSelection();
+        
+        jButtonAddUser.setEnabled(true);
+        jButtonUpdateUser.setEnabled(false);
+        jButtonDeleteUser.setEnabled(false);
     }
 
     public void fillTableUser(){
@@ -152,12 +164,11 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jLabelFullnameUser = new javax.swing.JLabel();
         jTextFieldFullnameUser = new javax.swing.JTextField();
         jLabelEmail = new javax.swing.JLabel();
-        jTextFieldLastnameEmail = new javax.swing.JTextField();
+        jTextFieldEmailUsers = new javax.swing.JTextField();
         jLabelIdUser = new javax.swing.JLabel();
         jTextFieldIdUser = new javax.swing.JTextField();
         jLabelStatusUser = new javax.swing.JLabel();
         jLabelRoleUser = new javax.swing.JLabel();
-        jTextFieldRoleUser = new javax.swing.JTextField();
         jScrollPaneUsers = new javax.swing.JScrollPane();
         jTableUser = new javax.swing.JTable();
         jButtonAddUser = new javax.swing.JButton();
@@ -165,6 +176,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jButtonCleanUser = new javax.swing.JButton();
         jButtonDeleteUser = new javax.swing.JButton();
         jComboBoxStatusUser = new javax.swing.JComboBox<>();
+        jComboBoxRoleUser = new javax.swing.JComboBox<>();
         jPanelRestaurantMenu = new javax.swing.JPanel();
         jPanelBox = new javax.swing.JPanel();
         jPanelTables = new javax.swing.JPanel();
@@ -189,13 +201,15 @@ public class JFrameAdmin extends javax.swing.JFrame {
 
         jTextFieldFullnameUser.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldFullnameUser.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldFullnameUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelEmail.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelEmail.setForeground(new java.awt.Color(0, 0, 0));
         jLabelEmail.setText("Correo:");
 
-        jTextFieldLastnameEmail.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldLastnameEmail.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldEmailUsers.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldEmailUsers.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldEmailUsers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelIdUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelIdUser.setForeground(new java.awt.Color(0, 0, 0));
@@ -203,6 +217,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
 
         jTextFieldIdUser.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldIdUser.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldIdUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelStatusUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelStatusUser.setForeground(new java.awt.Color(0, 0, 0));
@@ -211,9 +226,6 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jLabelRoleUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelRoleUser.setForeground(new java.awt.Color(0, 0, 0));
         jLabelRoleUser.setText("Rol:");
-
-        jTextFieldRoleUser.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldRoleUser.setForeground(new java.awt.Color(0, 0, 0));
 
         jTableUser.setBackground(new java.awt.Color(255, 255, 255));
         jTableUser.setForeground(new java.awt.Color(0, 0, 0));
@@ -228,6 +240,12 @@ public class JFrameAdmin extends javax.swing.JFrame {
 
             }
         ));
+        jTableUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTableUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableUserMouseClicked(evt);
+            }
+        });
         jScrollPaneUsers.setViewportView(jTableUser);
 
         jButtonAddUser.setBackground(new java.awt.Color(102, 255, 102));
@@ -235,18 +253,26 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jButtonAddUser.setForeground(new java.awt.Color(0, 0, 0));
         jButtonAddUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addBlack.png"))); // NOI18N
         jButtonAddUser.setText("Crear");
+        jButtonAddUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAddUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddUserActionPerformed(evt);
+            }
+        });
 
         jButtonUpdateUser.setBackground(new java.awt.Color(51, 102, 255));
         jButtonUpdateUser.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonUpdateUser.setForeground(new java.awt.Color(0, 0, 0));
         jButtonUpdateUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editBlack.png"))); // NOI18N
         jButtonUpdateUser.setText("Actualizar");
+        jButtonUpdateUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButtonCleanUser.setBackground(new java.awt.Color(255, 255, 102));
         jButtonCleanUser.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonCleanUser.setForeground(new java.awt.Color(0, 0, 0));
         jButtonCleanUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cleanBlack.png"))); // NOI18N
         jButtonCleanUser.setText("Limpiar");
+        jButtonCleanUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonCleanUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCleanUserActionPerformed(evt);
@@ -258,98 +284,99 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jButtonDeleteUser.setForeground(new java.awt.Color(0, 0, 0));
         jButtonDeleteUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/deleteBlack.png"))); // NOI18N
         jButtonDeleteUser.setText("Eliminar");
+        jButtonDeleteUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jComboBoxStatusUser.setBackground(new java.awt.Color(255, 255, 255));
         jComboBoxStatusUser.setForeground(new java.awt.Color(0, 0, 0));
         jComboBoxStatusUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción...", "ACTIVO", "INACTIVO" }));
         jComboBoxStatusUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jComboBoxRoleUser.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBoxRoleUser.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBoxRoleUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         javax.swing.GroupLayout jPanelEmployeesLayout = new javax.swing.GroupLayout(jPanelEmployees);
         jPanelEmployees.setLayout(jPanelEmployeesLayout);
         jPanelEmployeesLayout.setHorizontalGroup(
             jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                        .addComponent(jScrollPaneUsers)
-                        .addContainerGap())
-                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEmail)
-                            .addComponent(jLabelIdUser)
-                            .addComponent(jLabelStatusUser)
-                            .addComponent(jLabelRoleUser))
-                        .addGap(105, 105, 105)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextFieldLastnameEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldIdUser, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldRoleUser)
-                            .addComponent(jComboBoxStatusUser, javax.swing.GroupLayout.Alignment.LEADING, 0, 220, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanelEmployeesLayout.createSequentialGroup()
                 .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelEmployeesLayout.createSequentialGroup()
                         .addGap(197, 197, 197)
-                        .addComponent(jLabelTitleUser))
+                        .addComponent(jTextFieldIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabelFullnameUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldFullnameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
+                        .addGap(209, 209, 209)
+                        .addComponent(jLabelTitleUser)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanelEmployeesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
                         .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPaneUsers)
                             .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                                .addComponent(jButtonCleanUser)
-                                .addGap(95, 95, 95)
                                 .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonAddUser)
-                                    .addComponent(jButtonDeleteUser)))
+                                    .addComponent(jLabelIdUser)
+                                    .addComponent(jLabelStatusUser)
+                                    .addComponent(jLabelRoleUser)
+                                    .addComponent(jLabelEmail))
+                                .addGap(406, 406, 406)
+                                .addComponent(jButtonCleanUser)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEmployeesLayout.createSequentialGroup()
+                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelEmployeesLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonDeleteUser))
+                            .addGroup(jPanelEmployeesLayout.createSequentialGroup()
+                                .addComponent(jLabelFullnameUser)
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBoxRoleUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxStatusUser, 0, 226, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldEmailUsers)
+                                    .addComponent(jTextFieldFullnameUser))
+                                .addGap(52, 52, 52)
                                 .addComponent(jButtonUpdateUser)
-                                .addGap(190, 190, 190)))))
-                .addGap(0, 45, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                                .addComponent(jButtonAddUser)))
+                        .addGap(27, 27, 27))))
         );
         jPanelEmployeesLayout.setVerticalGroup(
             jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addComponent(jLabelTitleUser)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelIdUser)
                     .addComponent(jTextFieldIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFullnameUser)
+                    .addComponent(jTextFieldFullnameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonUpdateUser)
+                    .addComponent(jButtonAddUser))
+                .addGap(26, 26, 26)
+                .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEmail)
+                    .addComponent(jTextFieldEmailUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelStatusUser)
+                    .addComponent(jComboBoxStatusUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelFullnameUser)
-                            .addComponent(jTextFieldFullnameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelEmail)
-                            .addComponent(jTextFieldLastnameEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelStatusUser)
-                            .addComponent(jComboBoxStatusUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelRoleUser)
-                            .addComponent(jTextFieldRoleUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addComponent(jScrollPaneUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonAddUser)
-                            .addComponent(jButtonUpdateUser))
-                        .addGap(125, 125, 125)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonCleanUser)
-                            .addComponent(jButtonDeleteUser))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabelRoleUser)
+                        .addComponent(jComboBoxRoleUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonCleanUser)
+                        .addComponent(jButtonDeleteUser)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPaneUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelRestaurantMenu.setBackground(new java.awt.Color(255, 204, 102));
@@ -468,6 +495,104 @@ public class JFrameAdmin extends javax.swing.JFrame {
         cleanUserFields();
     }//GEN-LAST:event_jButtonCleanUserActionPerformed
 
+    private void jTableUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUserMouseClicked
+        int rowSelected = jTableUser.getSelectedRow();
+        if (rowSelected != -1) {
+            try {
+                jTextFieldIdUser.setText(jTableUser.getValueAt(rowSelected, 0).toString());
+                jTextFieldFullnameUser.setText(jTableUser.getValueAt(rowSelected, 1).toString());
+                jTextFieldEmailUsers.setText(jTableUser.getValueAt(rowSelected, 2).toString());
+                jComboBoxStatusUser.setSelectedItem(jTableUser.getValueAt(rowSelected, 3).toString());
+
+                String rolNombre = jTableUser.getValueAt(rowSelected, 4).toString();
+                for (int i = 0; i < jComboBoxRoleUser.getItemCount(); i++) {
+                    Roles rol = (Roles) jComboBoxRoleUser.getItemAt(i);
+                    if (rol.getName().equals(rolNombre)) {
+                        jComboBoxRoleUser.setSelectedIndex(i);
+                        break;
+                    }
+                }
+
+                jButtonAddUser.setEnabled(false);
+                jButtonUpdateUser.setEnabled(true);
+                jButtonDeleteUser.setEnabled(true);
+            } catch (Exception e) {
+                MessageUtils.ShowErrorMessage("Error al seleccionar el usuario: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jTableUserMouseClicked
+
+    private void jButtonAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUserActionPerformed
+        try {
+            Users user = new Users();
+            user.setId(Long.parseLong(jTextFieldIdUser.getText()));
+            user.setFullName(jTextFieldFullnameUser.getText());
+            user.setEmail(jTextFieldEmailUsers.getText());
+            user.setStatus(jComboBoxStatusUser.getSelectedItem().toString());
+            Roles role = (Roles) jComboBoxRoleUser.getSelectedItem();
+            user.setRoleId(role);
+            user.setPassword("123456"); // <-- Password Predefinida para los usuarios.
+
+            usersController.insert(user);
+            MessageUtils.ShowInfoMessage("Usuario creado exitosamente");
+            fillTableUser();
+            cleanUserFields();
+        } catch (Exception e) {
+            MessageUtils.ShowErrorMessage("Error al crear usuario: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonAddUserActionPerformed
+
+    private void jButtonUpdateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateUserActionPerformed
+        try {
+            if (jTextFieldIdUser.getText().isEmpty()) {
+                MessageUtils.ShowErrorMessage("Selecciona un usuario para actualizar.");
+                return;
+            }
+            Users user = usersController.findById(Long.parseLong(jTextFieldIdUser.getText()));
+            if (user == null) {
+                MessageUtils.ShowErrorMessage("El usuario no existe.");
+                return;
+            }
+            user.setFullName(jTextFieldFullnameUser.getText());
+            user.setEmail(jTextFieldEmailUsers.getText());
+            user.setStatus(jComboBoxStatusUser.getSelectedItem().toString());
+            Roles role = (Roles) jComboBoxRoleUser.getSelectedItem();
+            user.setRoleId(role);
+
+            usersController.update(user);
+            MessageUtils.ShowInfoMessage("Usuario actualizado exitosamente");
+            fillTableUser();
+            cleanUserFields();
+        } catch (Exception e) {
+            MessageUtils.ShowErrorMessage("Error al actualizar usuario: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonUpdateUserActionPerformed
+
+    private void jButtonDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteUserActionPerformed
+        try {
+            if (jTextFieldIdUser.getText().isEmpty()) {
+                MessageUtils.ShowErrorMessage("Selecciona un usuario para eliminar.");
+                return;
+            }
+            int option = JOptionPane.showConfirmDialog(rootPane, "¿Estás seguro de eliminar el usuario?",
+                    "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                long id = Long.parseLong(jTextFieldIdUser.getText());
+                Users user = usersController.findById(id);
+                if (user == null) {
+                    MessageUtils.ShowErrorMessage("El usuario no existe.");
+                    return;
+                }
+                usersController.delete(user);
+                MessageUtils.ShowInfoMessage("Usuario eliminado exitosamente.");
+                fillTableUser();
+                cleanUserFields();
+            }
+        } catch (Exception e) {
+            MessageUtils.ShowErrorMessage("Error al eliminar usuario: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonDeleteUserActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new JFrameAdmin().setVisible(true));
     }
@@ -478,6 +603,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCleanUser;
     private javax.swing.JButton jButtonDeleteUser;
     private javax.swing.JButton jButtonUpdateUser;
+    private javax.swing.JComboBox<Roles> jComboBoxRoleUser;
     private javax.swing.JComboBox<String> jComboBoxStatusUser;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelFullnameUser;
@@ -493,9 +619,8 @@ public class JFrameAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelTables;
     private javax.swing.JScrollPane jScrollPaneUsers;
     private javax.swing.JTable jTableUser;
+    private javax.swing.JTextField jTextFieldEmailUsers;
     private javax.swing.JTextField jTextFieldFullnameUser;
     private javax.swing.JTextField jTextFieldIdUser;
-    private javax.swing.JTextField jTextFieldLastnameEmail;
-    private javax.swing.JTextField jTextFieldRoleUser;
     // End of variables declaration//GEN-END:variables
 }

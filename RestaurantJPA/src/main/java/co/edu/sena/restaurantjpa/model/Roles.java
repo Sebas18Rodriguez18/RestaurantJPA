@@ -100,7 +100,7 @@ public class Roles implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.sena.restaurantjpa.model.Roles[ id=" + id + " ]";
+        return name;
     }
     
 }

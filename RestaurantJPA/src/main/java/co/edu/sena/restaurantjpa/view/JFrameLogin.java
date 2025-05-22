@@ -78,6 +78,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         jButtonExit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonExit.setForeground(new java.awt.Color(0, 0, 0));
         jButtonExit.setText("SALIR");
+        jButtonExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExitActionPerformed(evt);
@@ -86,6 +87,7 @@ public class JFrameLogin extends javax.swing.JFrame {
 
         jPasswordFieldPassword.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordFieldPassword.setForeground(new java.awt.Color(0, 0, 0));
+        jPasswordFieldPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanelBodyLayout = new javax.swing.GroupLayout(jPanelBody);
         jPanelBody.setLayout(jPanelBodyLayout);

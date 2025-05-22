@@ -21,8 +21,7 @@ public class UsersController implements IUsersController{
         if (users == null) {
             throw new Exception("El usuario es nulo");
         }
-        if("".equals(users.getFullName()))
-        {
+        if (users.getFullName() == null || users.getFullName().trim().isEmpty()) {
             throw new Exception("El nombre es obligatorio");
         }
         if ("".equals(users.getEmail())) {
@@ -55,9 +54,7 @@ public class UsersController implements IUsersController{
         if (users.getId() == 0 ) {
             throw new Exception("La id es obligatorio");
         }
-        if("".equals(users.getFullName()))
-        {
-        } else {
+        if (users.getFullName() == null || users.getFullName().trim().isEmpty()) {
             throw new Exception("El nombre es obligatorio");
         }
         if ("".equals(users.getEmail())) {
