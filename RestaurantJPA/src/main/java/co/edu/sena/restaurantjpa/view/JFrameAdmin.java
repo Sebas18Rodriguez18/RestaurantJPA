@@ -4,10 +4,14 @@
  */
 package co.edu.sena.restaurantjpa.view;
 
+import co.edu.sena.restaurantjpa.controllers.DishCategoryController;
+import co.edu.sena.restaurantjpa.controllers.DishController;
 import co.edu.sena.restaurantjpa.controllers.IRolesController;
 import co.edu.sena.restaurantjpa.controllers.IUsersController;
 import co.edu.sena.restaurantjpa.controllers.RolesController;
 import co.edu.sena.restaurantjpa.controllers.UsersController;
+import co.edu.sena.restaurantjpa.model.Dish;
+import co.edu.sena.restaurantjpa.model.DishCategory;
 import co.edu.sena.restaurantjpa.model.Roles;
 import co.edu.sena.restaurantjpa.model.Users;
 import co.edu.sena.restaurantjpa.util.MessageUtils;
@@ -28,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
 public class JFrameAdmin extends javax.swing.JFrame {
     private IUsersController usersController = new UsersController();
     private IRolesController rolesController = new RolesController();
+    private DishCategoryController dishCategoryController = new DishCategoryController();
 
     private JMenuItem menuEmployees;
     private JMenuItem menuTables;
@@ -47,6 +52,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
         initComponents();
         fillCombos();
         fillTableUser();
+        fillTableDish();
 
         menuEmployees = new JMenuItem("Empleados", getIcon(employeeIcon));
         menuTables = new JMenuItem("Mesas", getIcon(tableIcon));
@@ -79,10 +85,10 @@ public class JFrameAdmin extends javax.swing.JFrame {
             model.addElement("ACTIVO");
             model.addElement("INACTIVO");
             jComboBoxStatusUser.setModel(model);
-            
-            DefaultComboBoxModel<Roles> roleModel = new DefaultComboBoxModel<>();
+
+            DefaultComboBoxModel<String> roleModel = new DefaultComboBoxModel<>();
             for (Roles r : rolesController.findAll()) {
-                roleModel.addElement(r);
+                roleModel.addElement(r.getName());
             }
             jComboBoxRoleUser.setModel(roleModel);
         } catch (Exception e) {
@@ -125,6 +131,18 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jButtonUpdateUser.setEnabled(false);
         jButtonDeleteUser.setEnabled(false);
     }
+    private void cleanDishFields() {
+        jTextFieldIdDish.setText("");
+        jTextFieldNameDish.setText("");
+        jTextFieldCategoryDish.setText("");
+        jTextFieldPriceDish.setText("");
+        jTextFieldDescriptionDish.setText("");
+        jTableUser.clearSelection();
+        
+        jButtonAddDish.setEnabled(true);
+        jButtonUpdateDish.setEnabled(false);
+        jButtonDeleteDish.setEnabled(false);
+    }
 
     public void fillTableUser(){
         try {
@@ -153,6 +171,32 @@ public class JFrameAdmin extends javax.swing.JFrame {
         }
         
     }
+    public void fillTableDish(){
+    try {
+        DefaultTableModel model = new DefaultTableModel();
+        jTableDish.setModel(model);
+        model.addColumn("Id");
+        model.addColumn("Nombre");
+        model.addColumn("Descripción");
+        model.addColumn("Precio");
+        model.addColumn("Categoría");
+
+        String [] rows = new String[5];
+        DishController dishController = new DishController();
+        List<Dish> dishList = dishController.findAll();
+        for (Dish d: dishList) {
+            rows[0] = String.valueOf(d.getId());
+            rows[1] = d.getName();
+            rows[2] = d.getDescription();
+            rows[3] = String.valueOf(d.getPrice());
+            rows[4] = d.getCategoryId().getName();
+            model.addRow(rows);
+        }
+    }
+    catch (Exception e) {
+        MessageUtils.ShowErrorMessage(e.getMessage());
+    }
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -178,6 +222,23 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jComboBoxStatusUser = new javax.swing.JComboBox<>();
         jComboBoxRoleUser = new javax.swing.JComboBox<>();
         jPanelRestaurantMenu = new javax.swing.JPanel();
+        jLabelTitleDish = new javax.swing.JLabel();
+        jButtonUpdateDish = new javax.swing.JButton();
+        jButtonAddDish = new javax.swing.JButton();
+        jButtonDeleteDish = new javax.swing.JButton();
+        jButtonCleanDish = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableDish = new javax.swing.JTable();
+        jLabelIdDish = new javax.swing.JLabel();
+        jTextFieldIdDish = new javax.swing.JTextField();
+        jTextFieldNameDish = new javax.swing.JTextField();
+        jLabelNameDish = new javax.swing.JLabel();
+        jLabelPriceDish = new javax.swing.JLabel();
+        jTextFieldDescriptionDish = new javax.swing.JTextField();
+        jLabelDescriptionDish = new javax.swing.JLabel();
+        jTextFieldPriceDish = new javax.swing.JTextField();
+        jLabelCategoryDish = new javax.swing.JLabel();
+        jTextFieldCategoryDish = new javax.swing.JTextField();
         jPanelBox = new javax.swing.JPanel();
         jPanelTables = new javax.swing.JPanel();
         jPanelReports = new javax.swing.JPanel();
@@ -193,7 +254,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
 
         jLabelTitleUser.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelTitleUser.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelTitleUser.setText("ADMINISTRADOR DE USUARIOS");
+        jLabelTitleUser.setText("GESTOR DE USUARIOS");
 
         jLabelFullnameUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelFullnameUser.setForeground(new java.awt.Color(0, 0, 0));
@@ -266,6 +327,11 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jButtonUpdateUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editBlack.png"))); // NOI18N
         jButtonUpdateUser.setText("Actualizar");
         jButtonUpdateUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonUpdateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateUserActionPerformed(evt);
+            }
+        });
 
         jButtonCleanUser.setBackground(new java.awt.Color(255, 255, 102));
         jButtonCleanUser.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -285,6 +351,11 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jButtonDeleteUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/deleteBlack.png"))); // NOI18N
         jButtonDeleteUser.setText("Eliminar");
         jButtonDeleteUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteUserActionPerformed(evt);
+            }
+        });
 
         jComboBoxStatusUser.setBackground(new java.awt.Color(255, 255, 255));
         jComboBoxStatusUser.setForeground(new java.awt.Color(0, 0, 0));
@@ -300,14 +371,9 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jPanelEmployeesLayout.setHorizontalGroup(
             jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(jTextFieldIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(jLabelTitleUser)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(197, 197, 197)
+                .addComponent(jTextFieldIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(372, Short.MAX_VALUE))
             .addGroup(jPanelEmployeesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,6 +408,10 @@ public class JFrameAdmin extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                                 .addComponent(jButtonAddUser)))
                         .addGap(27, 27, 27))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEmployeesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelTitleUser)
+                .addGap(262, 262, 262))
         );
         jPanelEmployeesLayout.setVerticalGroup(
             jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,46 +449,231 @@ public class JFrameAdmin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelRestaurantMenu.setBackground(new java.awt.Color(255, 204, 102));
+        jPanelRestaurantMenu.setBackground(new java.awt.Color(153, 204, 255));
+
+        jLabelTitleDish.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabelTitleDish.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelTitleDish.setText("GESTOR DE PLATOS");
+
+        jButtonUpdateDish.setBackground(new java.awt.Color(51, 102, 255));
+        jButtonUpdateDish.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonUpdateDish.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonUpdateDish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editBlack.png"))); // NOI18N
+        jButtonUpdateDish.setText("Actualizar");
+        jButtonUpdateDish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonUpdateDish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateDishActionPerformed(evt);
+            }
+        });
+
+        jButtonAddDish.setBackground(new java.awt.Color(102, 255, 102));
+        jButtonAddDish.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAddDish.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonAddDish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addBlack.png"))); // NOI18N
+        jButtonAddDish.setText("Crear");
+        jButtonAddDish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAddDish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddDishActionPerformed(evt);
+            }
+        });
+
+        jButtonDeleteDish.setBackground(new java.awt.Color(255, 51, 51));
+        jButtonDeleteDish.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonDeleteDish.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonDeleteDish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/deleteBlack.png"))); // NOI18N
+        jButtonDeleteDish.setText("Eliminar");
+        jButtonDeleteDish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonDeleteDish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteDishActionPerformed(evt);
+            }
+        });
+
+        jButtonCleanDish.setBackground(new java.awt.Color(255, 255, 102));
+        jButtonCleanDish.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonCleanDish.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonCleanDish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cleanBlack.png"))); // NOI18N
+        jButtonCleanDish.setText("Limpiar");
+        jButtonCleanDish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonCleanDish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCleanDishActionPerformed(evt);
+            }
+        });
+
+        jTableDish.setBackground(new java.awt.Color(255, 255, 255));
+        jTableDish.setForeground(new java.awt.Color(0, 0, 0));
+        jTableDish.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTableDish.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableDishMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableDish);
+
+        jLabelIdDish.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelIdDish.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelIdDish.setText("ID:");
+
+        jTextFieldIdDish.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldIdDish.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldIdDish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jTextFieldNameDish.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldNameDish.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldNameDish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabelNameDish.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelNameDish.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelNameDish.setText("NOMBRE:");
+
+        jLabelPriceDish.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelPriceDish.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelPriceDish.setText("PRECIO:");
+
+        jTextFieldDescriptionDish.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldDescriptionDish.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldDescriptionDish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabelDescriptionDish.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelDescriptionDish.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelDescriptionDish.setText("DESCRIPCION:");
+
+        jTextFieldPriceDish.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldPriceDish.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldPriceDish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabelCategoryDish.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelCategoryDish.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelCategoryDish.setText("CATEGORIA:");
+
+        jTextFieldCategoryDish.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldCategoryDish.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldCategoryDish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanelRestaurantMenuLayout = new javax.swing.GroupLayout(jPanelRestaurantMenu);
         jPanelRestaurantMenu.setLayout(jPanelRestaurantMenuLayout);
         jPanelRestaurantMenuLayout.setHorizontalGroup(
             jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(jPanelRestaurantMenuLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRestaurantMenuLayout.createSequentialGroup()
+                        .addComponent(jButtonAddDish)
+                        .addGap(94, 94, 94)
+                        .addComponent(jButtonUpdateDish)
+                        .addGap(147, 147, 147)
+                        .addComponent(jButtonCleanDish)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonDeleteDish)
+                        .addGap(27, 27, 27))
+                    .addGroup(jPanelRestaurantMenuLayout.createSequentialGroup()
+                        .addGroup(jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanelRestaurantMenuLayout.createSequentialGroup()
+                                .addComponent(jLabelCategoryDish)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldCategoryDish, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelRestaurantMenuLayout.createSequentialGroup()
+                                .addGroup(jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelIdDish)
+                                    .addComponent(jLabelPriceDish))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldPriceDish, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldIdDish, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelRestaurantMenuLayout.createSequentialGroup()
+                                .addComponent(jLabelNameDish)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldNameDish, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelRestaurantMenuLayout.createSequentialGroup()
+                                .addComponent(jLabelDescriptionDish)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldDescriptionDish, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 56, Short.MAX_VALUE))))
+            .addGroup(jPanelRestaurantMenuLayout.createSequentialGroup()
+                .addGroup(jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRestaurantMenuLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanelRestaurantMenuLayout.createSequentialGroup()
+                        .addGap(283, 283, 283)
+                        .addComponent(jLabelTitleDish)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanelRestaurantMenuLayout.setVerticalGroup(
             jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGroup(jPanelRestaurantMenuLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabelTitleDish)
+                .addGap(61, 61, 61)
+                .addGroup(jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelIdDish)
+                    .addComponent(jTextFieldIdDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNameDish)
+                    .addComponent(jTextFieldNameDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldPriceDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPriceDish)
+                    .addComponent(jLabelDescriptionDish)
+                    .addComponent(jTextFieldDescriptionDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCategoryDish)
+                    .addComponent(jTextFieldCategoryDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGroup(jPanelRestaurantMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAddDish)
+                    .addComponent(jButtonUpdateDish)
+                    .addComponent(jButtonCleanDish)
+                    .addComponent(jButtonDeleteDish))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jPanelBox.setBackground(new java.awt.Color(153, 153, 0));
+        jPanelBox.setBackground(new java.awt.Color(204, 204, 255));
 
         javax.swing.GroupLayout jPanelBoxLayout = new javax.swing.GroupLayout(jPanelBox);
         jPanelBox.setLayout(jPanelBoxLayout);
         jPanelBoxLayout.setHorizontalGroup(
             jPanelBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 793, Short.MAX_VALUE)
         );
         jPanelBoxLayout.setVerticalGroup(
             jPanelBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 565, Short.MAX_VALUE)
         );
 
-        jPanelTables.setBackground(new java.awt.Color(204, 255, 255));
+        jPanelTables.setBackground(new java.awt.Color(204, 255, 204));
 
         javax.swing.GroupLayout jPanelTablesLayout = new javax.swing.GroupLayout(jPanelTables);
         jPanelTables.setLayout(jPanelTablesLayout);
         jPanelTablesLayout.setHorizontalGroup(
             jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 793, Short.MAX_VALUE)
         );
         jPanelTablesLayout.setVerticalGroup(
             jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 565, Short.MAX_VALUE)
         );
 
-        jPanelReports.setBackground(new java.awt.Color(0, 255, 51));
+        jPanelReports.setBackground(new java.awt.Color(255, 255, 204));
 
         javax.swing.GroupLayout jPanelReportsLayout = new javax.swing.GroupLayout(jPanelReports);
         jPanelReports.setLayout(jPanelReportsLayout);
@@ -506,8 +761,8 @@ public class JFrameAdmin extends javax.swing.JFrame {
 
                 String rolNombre = jTableUser.getValueAt(rowSelected, 4).toString();
                 for (int i = 0; i < jComboBoxRoleUser.getItemCount(); i++) {
-                    Roles rol = (Roles) jComboBoxRoleUser.getItemAt(i);
-                    if (rol.getName().equals(rolNombre)) {
+                    String nombreRolCombo = jComboBoxRoleUser.getItemAt(i);
+                    if (nombreRolCombo.equals(rolNombre)) {
                         jComboBoxRoleUser.setSelectedIndex(i);
                         break;
                     }
@@ -529,7 +784,18 @@ public class JFrameAdmin extends javax.swing.JFrame {
             user.setFullName(jTextFieldFullnameUser.getText());
             user.setEmail(jTextFieldEmailUsers.getText());
             user.setStatus(jComboBoxStatusUser.getSelectedItem().toString());
-            Roles role = (Roles) jComboBoxRoleUser.getSelectedItem();
+            String selectedRoleName = (String) jComboBoxRoleUser.getSelectedItem();
+            Roles role = null;
+            for (Roles r : rolesController.findAll()) {
+                if (r.getName().equals(selectedRoleName)) {
+                    role = r;
+                    break;
+                }
+            }
+            if (role == null) {
+                MessageUtils.ShowErrorMessage("Selecciona un rol válido.");
+                return;
+            }
             user.setRoleId(role);
             user.setPassword("123456"); // <-- Password Predefinida para los usuarios.
 
@@ -556,7 +822,18 @@ public class JFrameAdmin extends javax.swing.JFrame {
             user.setFullName(jTextFieldFullnameUser.getText());
             user.setEmail(jTextFieldEmailUsers.getText());
             user.setStatus(jComboBoxStatusUser.getSelectedItem().toString());
-            Roles role = (Roles) jComboBoxRoleUser.getSelectedItem();
+            String selectedRoleName = (String) jComboBoxRoleUser.getSelectedItem();
+            Roles role = null;
+            for (Roles r : rolesController.findAll()) {
+                if (r.getName().equals(selectedRoleName)) {
+                    role = r;
+                    break;
+                }
+            }
+            if (role == null) {
+                MessageUtils.ShowErrorMessage("Selecciona un rol válido.");
+                return;
+            }
             user.setRoleId(role);
 
             usersController.update(user);
@@ -593,23 +870,139 @@ public class JFrameAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonDeleteUserActionPerformed
 
+    private void jButtonUpdateDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateDishActionPerformed
+        try {
+            if (jTextFieldIdDish.getText().isEmpty()) {
+                MessageUtils.ShowErrorMessage("Selecciona un plato para actualizar.");
+                return;
+            }
+            DishController dishController = new DishController();
+            Dish dish = dishController.findById(Long.parseLong(jTextFieldIdDish.getText()));
+            if (dish == null) {
+                MessageUtils.ShowErrorMessage("El plato no existe.");
+                return;
+            }
+            dish.setName(jTextFieldNameDish.getText());
+            dish.setDescription(jTextFieldDescriptionDish.getText());
+            dish.setPrice(new java.math.BigDecimal(jTextFieldPriceDish.getText()));
+
+            Long idCategory = Long.parseLong(jTextFieldCategoryDish.getText());
+            DishCategoryController dishCategoryController = new DishCategoryController();
+            DishCategory category = dishCategoryController.findById(idCategory);
+            if (category == null) {
+                MessageUtils.ShowErrorMessage("La categoría no existe.");
+                return;
+            }
+            dish.setCategoryId(category);
+
+            dishController.update(dish);
+            MessageUtils.ShowInfoMessage("Plato actualizado exitosamente");
+            fillTableDish();
+            cleanDishFields();
+        } catch (Exception e) {
+            MessageUtils.ShowErrorMessage("Error al actualizar plato: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonUpdateDishActionPerformed
+
+    private void jButtonDeleteDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteDishActionPerformed
+        try {
+            if (jTextFieldIdDish.getText().isEmpty()) {
+                MessageUtils.ShowErrorMessage("Selecciona un plato para eliminar.");
+                return;
+            }
+            int option = JOptionPane.showConfirmDialog(rootPane, "¿Estás seguro de eliminar el plato?",
+                    "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                DishController dishController = new DishController();
+                Dish dish = dishController.findById(Long.parseLong(jTextFieldIdDish.getText()));
+                if (dish == null) {
+                    MessageUtils.ShowErrorMessage("El plato no existe.");
+                    return;
+                }
+                dishController.delete(dish);
+                MessageUtils.ShowInfoMessage("Plato eliminado exitosamente.");
+                fillTableDish();
+                cleanDishFields();
+            }
+        } catch (Exception e) {
+            MessageUtils.ShowErrorMessage("Error al eliminar plato: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonDeleteDishActionPerformed
+
+    private void jButtonCleanDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanDishActionPerformed
+        cleanDishFields();
+    }//GEN-LAST:event_jButtonCleanDishActionPerformed
+
+    private void jTableDishMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDishMouseClicked
+        int rowSelected = jTableDish.getSelectedRow();
+    if (rowSelected != -1) {
+        try {
+            jTextFieldIdDish.setText(jTableDish.getValueAt(rowSelected, 0).toString());
+            jTextFieldNameDish.setText(jTableDish.getValueAt(rowSelected, 1).toString());
+            jTextFieldDescriptionDish.setText(jTableDish.getValueAt(rowSelected, 2).toString());
+            jTextFieldPriceDish.setText(jTableDish.getValueAt(rowSelected, 3).toString());
+            jTextFieldCategoryDish.setText(jTableDish.getValueAt(rowSelected, 4).toString());
+
+            jButtonAddDish.setEnabled(false);
+            jButtonUpdateDish.setEnabled(true);
+            jButtonDeleteDish.setEnabled(true);
+        } catch (Exception e) {
+            MessageUtils.ShowErrorMessage("Error al seleccionar el plato: " + e.getMessage());
+        }
+    }
+    }//GEN-LAST:event_jTableDishMouseClicked
+
+    private void jButtonAddDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddDishActionPerformed
+        try {
+        Dish dish = new Dish();
+        dish.setId(Long.parseLong(jTextFieldIdDish.getText()));
+        dish.setName(jTextFieldNameDish.getText());
+        dish.setDescription(jTextFieldDescriptionDish.getText());
+        dish.setPrice(new java.math.BigDecimal(jTextFieldPriceDish.getText()));
+
+        // Obtener la categoría por ID
+        Long idCategory = Long.parseLong(jTextFieldCategoryDish.getText());
+        DishCategory category = new DishCategory();
+        category.setId(idCategory);
+        dish.setCategoryId(category);
+
+        DishController dishController = new DishController();
+        dishController.insert(dish);
+        MessageUtils.ShowInfoMessage("Plato creado exitosamente");
+        fillTableDish();
+        cleanDishFields();
+    } catch (Exception e) {
+        MessageUtils.ShowErrorMessage("Error al crear plato: " + e.getMessage());
+    }
+    }//GEN-LAST:event_jButtonAddDishActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new JFrameAdmin().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar JMenuBarMain;
+    private javax.swing.JButton jButtonAddDish;
     private javax.swing.JButton jButtonAddUser;
+    private javax.swing.JButton jButtonCleanDish;
     private javax.swing.JButton jButtonCleanUser;
+    private javax.swing.JButton jButtonDeleteDish;
     private javax.swing.JButton jButtonDeleteUser;
+    private javax.swing.JButton jButtonUpdateDish;
     private javax.swing.JButton jButtonUpdateUser;
-    private javax.swing.JComboBox<Roles> jComboBoxRoleUser;
+    private javax.swing.JComboBox<String> jComboBoxRoleUser;
     private javax.swing.JComboBox<String> jComboBoxStatusUser;
+    private javax.swing.JLabel jLabelCategoryDish;
+    private javax.swing.JLabel jLabelDescriptionDish;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelFullnameUser;
+    private javax.swing.JLabel jLabelIdDish;
     private javax.swing.JLabel jLabelIdUser;
+    private javax.swing.JLabel jLabelNameDish;
+    private javax.swing.JLabel jLabelPriceDish;
     private javax.swing.JLabel jLabelRoleUser;
     private javax.swing.JLabel jLabelStatusUser;
+    private javax.swing.JLabel jLabelTitleDish;
     private javax.swing.JLabel jLabelTitleUser;
     private javax.swing.JPanel jPanelBox;
     private javax.swing.JPanel jPanelDesktop;
@@ -617,10 +1010,17 @@ public class JFrameAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelReports;
     private javax.swing.JPanel jPanelRestaurantMenu;
     private javax.swing.JPanel jPanelTables;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneUsers;
+    private javax.swing.JTable jTableDish;
     private javax.swing.JTable jTableUser;
+    private javax.swing.JTextField jTextFieldCategoryDish;
+    private javax.swing.JTextField jTextFieldDescriptionDish;
     private javax.swing.JTextField jTextFieldEmailUsers;
     private javax.swing.JTextField jTextFieldFullnameUser;
+    private javax.swing.JTextField jTextFieldIdDish;
     private javax.swing.JTextField jTextFieldIdUser;
+    private javax.swing.JTextField jTextFieldNameDish;
+    private javax.swing.JTextField jTextFieldPriceDish;
     // End of variables declaration//GEN-END:variables
 }
