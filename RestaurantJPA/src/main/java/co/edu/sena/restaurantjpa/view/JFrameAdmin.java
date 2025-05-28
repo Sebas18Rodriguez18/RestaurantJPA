@@ -440,7 +440,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
 
         jComboBoxStatusUser.setBackground(new java.awt.Color(255, 255, 255));
         jComboBoxStatusUser.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBoxStatusUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción...", "activo", "inactivo" }));
+        jComboBoxStatusUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción...", "ACTIVO", "INACTIVO" }));
         jComboBoxStatusUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jComboBoxRoleUser.setBackground(new java.awt.Color(255, 255, 255));
@@ -740,7 +740,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jPanelTable.setBackground(new java.awt.Color(204, 255, 204));
         jPanelTable.setPreferredSize(new java.awt.Dimension(810, 572));
 
-        jLabelTitleTable.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabelTitleTable.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelTitleTable.setForeground(new java.awt.Color(0, 0, 0));
         jLabelTitleTable.setText("GESTION DE MESAS");
 
@@ -845,10 +845,6 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jPanelTable.setLayout(jPanelTableLayout);
         jPanelTableLayout.setHorizontalGroup(
             jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTableLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelTitleTable)
-                .addGap(232, 232, 232))
             .addGroup(jPanelTableLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -881,13 +877,17 @@ public class JFrameAdmin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                         .addComponent(jButtonDeleteTable)
                         .addGap(20, 20, 20))))
+            .addGroup(jPanelTableLayout.createSequentialGroup()
+                .addGap(283, 283, 283)
+                .addComponent(jLabelTitleTable)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelTableLayout.setVerticalGroup(
             jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTableLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(21, 21, 21)
                 .addComponent(jLabelTitleTable)
-                .addGap(49, 49, 49)
+                .addGap(45, 45, 45)
                 .addGroup(jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelIdTable)
                     .addComponent(jTextFieldIdTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -899,7 +899,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
                     .addComponent(jTextFieldNumberTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelStatusTable)
                     .addComponent(jComboBoxStatusTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAddTable)
                     .addComponent(jButtonUpdateTable)

@@ -7,13 +7,10 @@
 
 ---
 
-<<<<<<< HEAD
 ## 📌 ¿De que RestaurantJPA?
 <picture> <img align="right" src="https://github.com/Sebas18Rodriguez18/Sebas18Rodriguez18/blob/main/logoClass.png" width="250px"></picture>
-=======
 ## 📌 ¿De que trata RestaurantJPA?
 <picture> <img align="right" src="https://github.com/Sebas18Rodriguez18/Sebas18Rodriguez18/blob/main/logoClass.png" width="220px"></picture>
->>>>>>> origin/main
 
 > 🎯 **RestaurantJPA** es un proyecto académico desarrollado como parte del programa de **Análisis y Desarrollo de Software** en el **SENA CLEM (Centro Latinoamericano de Especies Menores)**.  
 >  
