@@ -25,7 +25,7 @@ import javax.persistence.OneToMany;
  * @author Sebas
  */
 @Entity
-@javax.persistence.Table(name = "table")
+@javax.persistence.Table(name = "dining_table")
 @NamedQueries({
     @NamedQuery(name = "DiningTable.findAll", query = "SELECT t FROM DiningTable t"),
     @NamedQuery(name = "DiningTable.findById", query = "SELECT t FROM DiningTable t WHERE t.id = :id"),

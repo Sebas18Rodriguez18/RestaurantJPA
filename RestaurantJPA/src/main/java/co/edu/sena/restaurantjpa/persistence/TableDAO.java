@@ -54,7 +54,8 @@ public class TableDAO implements ITableDAO {
     @Override
     public List<DiningTable> findAll() throws Exception {
         try {
-            Query query = EntityManagerHelper.getEntityManager().createNamedQuery("Table.findAll");
+            Query query = EntityManagerHelper.getEntityManager().createNamedQuery(""
+                    + "DiningTable.findAll");
             return query.getResultList();
         } catch (RuntimeException e) {
             throw e;
