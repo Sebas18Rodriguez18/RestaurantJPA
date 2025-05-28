@@ -76,22 +76,14 @@ public class JFrameAdmin extends javax.swing.JFrame {
 
         menuEmployees.addActionListener(e -> showPanel(jPanelEmployees));
         menuMenu.addActionListener(e -> showPanel(jPanelRestaurantMenu));
-<<<<<<< HEAD
         menuTables.addActionListener(e -> showPanel(jPanelTable));
-=======
-        menuTables.addActionListener(e -> showPanel(jPanelTables));
->>>>>>> origin/dev
         menuBox.addActionListener(e -> showPanel(jPanelBox));
         menuReports.addActionListener(e -> showPanel(jPanelReports));
         menuExit.addActionListener(e -> exitToLogin());
         
         jPanelEmployees.setVisible(true);
         jPanelRestaurantMenu.setVisible(false);
-<<<<<<< HEAD
         jPanelTable.setVisible(false);
-=======
-        jPanelTables.setVisible(false);
->>>>>>> origin/dev
         jPanelBox.setVisible(false);
         jPanelReports.setVisible(false);
 
@@ -448,7 +440,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
 
         jComboBoxStatusUser.setBackground(new java.awt.Color(255, 255, 255));
         jComboBoxStatusUser.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBoxStatusUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción...", "ACTIVO", "INACTIVO" }));
+        jComboBoxStatusUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción...", "activo", "inactivo" }));
         jComboBoxStatusUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jComboBoxRoleUser.setBackground(new java.awt.Color(255, 255, 255));
@@ -465,7 +457,6 @@ public class JFrameAdmin extends javax.swing.JFrame {
                     .addComponent(jScrollPaneUsers)
                     .addGroup(jPanelEmployeesLayout.createSequentialGroup()
                         .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
                             .addGroup(jPanelEmployeesLayout.createSequentialGroup()
                                 .addGap(191, 191, 191)
                                 .addComponent(jTextFieldIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -496,42 +487,6 @@ public class JFrameAdmin extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                                 .addComponent(jButtonDeleteUser)))
                         .addGap(21, 21, 21)))
-=======
-                            .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                                .addGap(191, 191, 191)
-                                .addComponent(jTextFieldIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                                    .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelIdUser)
-                                        .addComponent(jLabelStatusUser)
-                                        .addComponent(jLabelRoleUser)
-                                        .addComponent(jLabelEmail))
-                                    .addGap(354, 354, 354))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEmployeesLayout.createSequentialGroup()
-                                    .addComponent(jLabelFullnameUser)
-                                    .addGap(29, 29, 29)
-                                    .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jComboBoxRoleUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBoxStatusUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldEmailUsers)
-                                        .addComponent(jTextFieldFullnameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                                .addComponent(jButtonUpdateUser)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                                .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                                        .addComponent(jButtonCleanUser)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                                        .addComponent(jButtonDeleteUser))
-                                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButtonAddUser)))
-                                .addGap(21, 21, 21)))))
->>>>>>> origin/dev
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEmployeesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -543,7 +498,6 @@ public class JFrameAdmin extends javax.swing.JFrame {
             .addGroup(jPanelEmployeesLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabelTitleUser)
-<<<<<<< HEAD
                 .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelEmployeesLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -566,32 +520,6 @@ public class JFrameAdmin extends javax.swing.JFrame {
                     .addComponent(jTextFieldEmailUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-=======
-                .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonUpdateUser)
-                            .addComponent(jButtonAddUser))
-                        .addGap(129, 129, 129)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonCleanUser)
-                            .addComponent(jButtonDeleteUser))
-                        .addGap(18, 18, Short.MAX_VALUE))
-                    .addGroup(jPanelEmployeesLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelIdUser)
-                            .addComponent(jTextFieldIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelFullnameUser)
-                            .addComponent(jTextFieldFullnameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelEmail)
-                            .addComponent(jTextFieldEmailUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
->>>>>>> origin/dev
                         .addGap(30, 30, 30)
                         .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelStatusUser)
@@ -600,7 +528,6 @@ public class JFrameAdmin extends javax.swing.JFrame {
                         .addGroup(jPanelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelRoleUser)
                             .addComponent(jComboBoxRoleUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-<<<<<<< HEAD
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEmployeesLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -610,11 +537,6 @@ public class JFrameAdmin extends javax.swing.JFrame {
                         .addGap(52, 52, 52)))
                 .addComponent(jScrollPaneUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-=======
-                        .addGap(38, 38, 38)))
-                .addComponent(jScrollPaneUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
->>>>>>> origin/dev
         );
 
         jPanelRestaurantMenu.setBackground(new java.awt.Color(153, 204, 255));
@@ -818,7 +740,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jPanelTable.setBackground(new java.awt.Color(204, 255, 204));
         jPanelTable.setPreferredSize(new java.awt.Dimension(810, 572));
 
-        jLabelTitleTable.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabelTitleTable.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabelTitleTable.setForeground(new java.awt.Color(0, 0, 0));
         jLabelTitleTable.setText("GESTION DE MESAS");
 
@@ -923,6 +845,10 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jPanelTable.setLayout(jPanelTableLayout);
         jPanelTableLayout.setHorizontalGroup(
             jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTableLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelTitleTable)
+                .addGap(232, 232, 232))
             .addGroup(jPanelTableLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -955,17 +881,13 @@ public class JFrameAdmin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                         .addComponent(jButtonDeleteTable)
                         .addGap(20, 20, 20))))
-            .addGroup(jPanelTableLayout.createSequentialGroup()
-                .addGap(283, 283, 283)
-                .addComponent(jLabelTitleTable)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelTableLayout.setVerticalGroup(
             jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTableLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(17, 17, 17)
                 .addComponent(jLabelTitleTable)
-                .addGap(45, 45, 45)
+                .addGap(49, 49, 49)
                 .addGroup(jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelIdTable)
                     .addComponent(jTextFieldIdTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -977,7 +899,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
                     .addComponent(jTextFieldNumberTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelStatusTable)
                     .addComponent(jComboBoxStatusTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAddTable)
                     .addComponent(jButtonUpdateTable)
@@ -1000,23 +922,6 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jPanelBoxLayout.setVerticalGroup(
             jPanelBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 572, Short.MAX_VALUE)
-<<<<<<< HEAD
-=======
-        );
-
-        jPanelTables.setBackground(new java.awt.Color(204, 255, 204));
-        jPanelTables.setPreferredSize(new java.awt.Dimension(810, 572));
-
-        javax.swing.GroupLayout jPanelTablesLayout = new javax.swing.GroupLayout(jPanelTables);
-        jPanelTables.setLayout(jPanelTablesLayout);
-        jPanelTablesLayout.setHorizontalGroup(
-            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 810, Short.MAX_VALUE)
-        );
-        jPanelTablesLayout.setVerticalGroup(
-            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 572, Short.MAX_VALUE)
->>>>>>> origin/dev
         );
 
         jPanelReports.setBackground(new java.awt.Color(255, 255, 204));
