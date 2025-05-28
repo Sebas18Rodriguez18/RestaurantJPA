@@ -159,10 +159,30 @@
                               </Group>
                               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                                   <Group type="102" attributes="0">
                                       <Component id="jButtonUpdateUser" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jButtonAddUser" min="-2" max="-2" attributes="0"/>
+=======
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButtonUpdateUser" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jButtonCleanUser" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="75" max="32767" attributes="0"/>
+                                              <Component id="jButtonDeleteUser" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <Component id="jButtonAddUser" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+>>>>>>> origin/dev
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jButtonCleanUser" min="-2" max="-2" attributes="0"/>
@@ -170,7 +190,10 @@
                                       <Component id="jButtonDeleteUser" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+<<<<<<< HEAD
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+=======
+>>>>>>> origin/dev
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -187,6 +210,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="jLabelTitleUser" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
@@ -239,6 +263,53 @@
                       </Group>
                       <Component id="jScrollPaneUsers" min="-2" pref="220" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+=======
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jButtonUpdateUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonAddUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jButtonCleanUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonDeleteUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelIdUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldIdUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelFullnameUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldFullnameUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldEmailUsers" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelStatusUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxStatusUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabelRoleUser" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxRoleUser" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="jScrollPaneUsers" min="-2" pref="220" max="-2" attributes="0"/>
+                      <EmptySpace pref="10" max="32767" attributes="0"/>
+>>>>>>> origin/dev
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1219,6 +1290,32 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[810, 572]"/>
+<<<<<<< HEAD
+=======
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="810" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="572" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanelTables">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="cc" type="rgb"/>
+>>>>>>> origin/dev
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[810, 572]"/>
